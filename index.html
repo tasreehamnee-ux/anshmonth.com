@@ -674,6 +674,7 @@ edia(max-width: 768px) {
                         <th>عدد المشتركين</th>
                         <th>جهة التنفيذ</th>
                         <th>الجهة المستفيدة</th>
+                       <th>تاريخ التنفيذ</th>
                         <th>الملاحظات</th>
                     </tr>
                 </thead>
@@ -744,6 +745,7 @@ edia(max-width: 768px) {
                         executor: inputs[2].value,
                         beneficiary: inputs[3].value,
                         notes: inputs[4].value,
+                          date: inputs[5].value,
                     });
                 });
                 const data = {
@@ -896,7 +898,8 @@ edia(max-width: 768px) {
                                     <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:60px;">عدد المشتركين</th>
                                     <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:90px;">جهة التنفيذ</th>
                                     <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:90px;">الجهة المستفيدة</th>
-                                    <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:120px;">الملاحظات</th>
+                                    <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:10px;width:90px;">تاريخ التنفيذ</th>
+                                    <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:120px;">الملاحظات</th>            
                                 </tr>
                             </thead>
                             <tbody>
