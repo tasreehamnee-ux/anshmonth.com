@@ -623,14 +623,14 @@ edia(max-width: 768px) {
                     <label>الموظف المسؤول:</label>
                     <select id="responsibleEmployee">
                         <option value="">اختر الموظف</option>
-                        <option value="مدير القسم">م.م صفاء هادي عبد العالي</option>
+                        <option value="م.م صفاء هادي عبد العالي">م.م صفاء هادي عبد العالي</option>
                         <option value="المشرف المباشر">بنين عقيل</option>
-                        <option value="الموظف الإداري">م.م احمد هاشم</option>
-                        <option value="مسؤول الموارد البشرية">م.م علي صباح</option>
-                         <option value="مسؤول الموارد البشرية">ستار عبد كعيم</option>
-                         <option value="مسؤول الموارد البشرية">ضرغام ماجد</option>
-                        <option value="مسؤول الموارد البشرية">م علي ناجح</option>
-                        <option value="مسؤول الموارد البشرية">هديل مكوار</option>
+                        <option value="م.م احمد هاشم">م.م احمد هاشم</option>
+                        <option value="م.م علي صباح">م.م علي صباح</option>
+                         <option value="ستار عبد اكعيم ">ستار عبد كعيم</option>
+                         <option value="ضرغام ماجد">ضرغام ماجد</option>
+                        <option value="م. علي ناجح">م علي ناجح</option>
+                        <option value="هديل مكوار">هديل مكوار</option>
                     </select>
                 </div>
                 <div class="control-group">
@@ -649,19 +649,19 @@ edia(max-width: 768px) {
             </div>
 
             <button class="btn btn-primary" onclick="addRow()">
-                ➕ إضافة صف
+                 إضافة صف
             </button>
 
             <button class="btn btn-success" onclick="savePDF()" id="savePdfBtn">
-                💾 حفظ PDF
+                 حفظ PDF
             </button>
 
             <button class="btn btn-info" onclick="exportToPDF()" id="exportPdfBtn">
-                📄 تصدير PDF
+                 تصدير PDF
             </button>
 
             <button class="btn btn-primary" onclick="clearAll()">
-                🗑️ مسح الكل
+                 مسح الكل
             </button>
         </div>
 
@@ -675,7 +675,6 @@ edia(max-width: 768px) {
                         <th>جهة التنفيذ</th>
                         <th>الجهة المستفيدة</th>
                        <th>تاريخ التنفيذ</th>
-                        <th>الملاحظات</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -744,7 +743,6 @@ edia(max-width: 768px) {
                         participants: inputs[1].value,
                         executor: inputs[2].value,
                         beneficiary: inputs[3].value,
-                        notes: inputs[4].value,
                           date: inputs[5].value,
                     });
                 });
@@ -775,7 +773,7 @@ edia(max-width: 768px) {
                 <td><input type="number" oninput="autoSave()" placeholder="عدد المشتركين"></td>
                 <td><input type="text" oninput="autoSave(); autoResizeInput(this)" placeholder="جهة التنفيذ"></td>
                 <td><input type="text" oninput="autoSave(); autoResizeInput(this)" placeholder="الجهة المستفيدة"></td>
-                <td><textarea placeholder="الملاحظات" oninput="autoSave(); autoResizeTextarea(this)"></textarea></td>
+                  <td><input type="date" onchange="autoSave()" value="${data.date || ''}"></td>
             `;
             tbody.appendChild(tr);
             autoSave();
@@ -791,8 +789,6 @@ edia(max-width: 768px) {
                 <td><input type="number" oninput="autoSave()" value="${data.participants || ''}" placeholder="عدد المشتركين"></td>
                 <td><input type="text" oninput="autoSave(); autoResizeInput(this)" value="${data.executor || ''}" placeholder="جهة التنفيذ"></td>
                 <td><input type="text" oninput="autoSave(); autoResizeInput(this)" value="${data.beneficiary || ''}" placeholder="الجهة المستفيدة"></td>
-                <td><textarea placeholder="الملاحظات" oninput="autoSave(); autoResizeTextarea(this)">${data.notes || ''}</textarea></td>
-            `;
             tbody.appendChild(tr);
             setTimeout(() => {
                 tr.querySelectorAll('textarea').forEach(ta => autoResizeTextarea(ta));
@@ -820,7 +816,7 @@ edia(max-width: 768px) {
                     participants: inputs[1].value,
                     executor: inputs[2].value,
                     beneficiary: inputs[3].value,
-                    notes: inputs[4].value,
+                   date: inputs[8].value,
                 });
             });
             return rows;
@@ -898,8 +894,7 @@ edia(max-width: 768px) {
                                     <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:60px;">عدد المشتركين</th>
                                     <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:90px;">جهة التنفيذ</th>
                                     <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:90px;">الجهة المستفيدة</th>
-                                    <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:10px;width:90px;">تاريخ التنفيذ</th>
-                                    <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:120px;">الملاحظات</th>            
+                                    <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:10px;width:90px;">تاريخ التنفيذ</th>        
                                 </tr>
                             </thead>
                             <tbody>
@@ -915,7 +910,7 @@ edia(max-width: 768px) {
                                 <td style="border:1px solid #dee2e6;padding:3px;text-align:center;font-size:8px;width:60px;word-wrap:break-word;">${escapeHtml(row.participants || '')}</td>
                                 <td style="border:1px solid #dee2e6;padding:3px;text-align:center;font-size:8px;width:90px;word-wrap:break-word;">${escapeHtml(row.executor || '')}</td>
                                 <td style="border:1px solid #dee2e6;padding:3px;text-align:center;font-size:8px;width:90px;word-wrap:break-word;">${escapeHtml(row.beneficiary || '')}</td>
-                                <td style="border:1px solid #dee2e6;padding:3px;text-align:center;font-size:8px;width:120px;word-wrap:break-word;">${escapeHtml(row.notes || '')}</td>
+                                 <th style="border:2px solid #1e3c72;padding:6px;text-align:center;font-size:10px;width:90px;">تاريخ التنفيذ</th>
                             </tr>
                         `;
                     });
