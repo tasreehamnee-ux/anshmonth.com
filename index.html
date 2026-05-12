@@ -6,6 +6,7 @@
     <title>استمارة نشاطات قسم الإعداد والتدريب</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -177,6 +178,16 @@
         .btn-info {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
+        }
+
+        .btn-excel {
+            background: linear-gradient(135deg, #217346 0%, #107c41 100%);
+            color: white;
+        }
+
+        .btn-excel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(33, 115, 70, 0.4);
         }
 
         .btn:hover {
@@ -583,6 +594,7 @@
         }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
     <div class="notification" id="notification">
@@ -686,8 +698,16 @@
                 💾 حفظ PDF
             </button>
 
+            <button class="btn btn-excel" onclick="saveExcel()" id="saveExcelBtn">
+                💾 حفظ Excel
+            </button>
+
             <button class="btn btn-info" onclick="exportToPDF()" id="exportPdfBtn">
                 📄 تصدير PDF
+            </button>
+
+            <button class="btn btn-excel" onclick="exportToExcel()" id="exportExcelBtn">
+                📊 تصدير Excel
             </button>
 
             <button class="btn btn-success" onclick="shareViaWhatsApp()" id="shareWhatsAppBtn" title="إرسال عبر واتساب">
@@ -1387,6 +1407,314 @@
                 closeShareModal();
             }
         });
+
+        async function exportToExcel() {
+            const btn = document.getElementById('exportExcelBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ جاري التصدير...';
+
+            try {
+                const month = document.getElementById('monthSelect').value || 'غير محدد';
+                const year = document.getElementById('yearSelect').value || '2026';
+                const responsibleEmployee = document.getElementById('responsibleEmployee').value || 'غير محدد';
+                const department = document.getElementById('departmentSelect').value || 'غير محددة';
+                const currentRows = collectCurrentData();
+
+                if (!currentRows || currentRows.length === 0) {
+                    showNotification('⚠️ لا توجد بيانات للتصدير', 'error');
+                    return;
+                }
+
+                // Create workbook
+                const wb = XLSX.utils.book_new();
+                wb.Props = {
+                    Title: "استمارة نشاطات قسم الإعداد والتدريب",
+                    Subject: "الأنشطة الشهرية",
+                    Author: "قسم الإعداد والتدريب - مديرية تربية المثنى",
+                    CreatedDate: new Date()
+                };
+
+                // Header data
+                const headerInfo = [
+                    ['وزارة التربية'],
+                    ['مديرية تربية المثنى'],
+                    ['قسم الإعداد والتدريب'],
+                    [''],
+                    ['استمارة نشاطات قسم الإعداد والتدريب'],
+                    ['استمارة الانشطة الشهرية'],
+                    ['الشهر: ' + month + ' | السنة: ' + year],
+                    ['الموظف المسؤول: ' + responsibleEmployee + ' | الشعبة: ' + department],
+                    [''],
+                    ['ت', 'اسم النشاط', 'عدد المشتركين', 'جهة التنفيذ', 'الجهة المستفيدة', 'تاريخ التنفيذ']
+                ];
+
+                // Data rows
+                const dataRows = currentRows.map((row, index) => [
+                    index + 1,
+                    row.activityName || '',
+                    row.participants || '',
+                    row.executor || '',
+                    row.beneficiary || '',
+                    row.date || ''
+                ]);
+
+                // Footer
+                const footerRows = [
+                    [''],
+                    ['تصميم وبرمجة م. م صفاء هادي عبد العالي - مدير قسم الإعداد والتدريب'],
+                    ['تاريخ التصدير: ' + new Date().toLocaleDateString('ar-IQ')],
+                    ['عدد السجلات: ' + currentRows.length]
+                ];
+
+                const allData = [...headerInfo, ...dataRows, ...footerRows];
+                const ws = XLSX.utils.aoa_to_sheet(allData);
+
+                // Set column widths
+                ws['!cols'] = [
+                    { wch: 5 },   // ت
+                    { wch: 35 },  // اسم النشاط
+                    { wch: 15 },  // عدد المشتركين
+                    { wch: 25 },  // جهة التنفيذ
+                    { wch: 25 },  // الجهة المستفيدة
+                    { wch: 15 }   // تاريخ التنفيذ
+                ];
+
+                // Set row heights for header
+                ws['!rows'] = [
+                    { hpt: 20 }, { hpt: 20 }, { hpt: 20 }, { hpt: 10 },
+                    { hpt: 25 }, { hpt: 22 }, { hpt: 20 }, { hpt: 20 }, { hpt: 10 },
+                    { hpt: 25 }
+                ];
+
+                // Merge cells for header rows
+                ws['!merges'] = [
+                    { s: { r: 0, c: 0 }, e: { r: 0, c: 5 } },  // وزارة التربية
+                    { s: { r: 1, c: 0 }, e: { r: 1, c: 5 } },  // مديرية تربية المثنى
+                    { s: { r: 2, c: 0 }, e: { r: 2, c: 5 } },  // قسم الإعداد والتدريب
+                    { s: { r: 4, c: 0 }, e: { r: 4, c: 5 } },  // استمارة نشاطات
+                    { s: { r: 5, c: 0 }, e: { r: 5, c: 5 } },  // استمارة الانشطة الشهرية
+                    { s: { r: 6, c: 0 }, e: { r: 6, c: 5 } },  // الشهر والسنة
+                    { s: { r: 7, c: 0 }, e: { r: 7, c: 5 } },  // الموظف والشعبة
+                    { s: { r: allData.length - 3, c: 0 }, e: { r: allData.length - 3, c: 5 } },  // التصميم
+                    { s: { r: allData.length - 2, c: 0 }, e: { r: allData.length - 2, c: 5 } },  // التاريخ
+                    { s: { r: allData.length - 1, c: 0 }, e: { r: allData.length - 1, c: 5 } }   // عدد السجلات
+                ];
+
+                // Add styles to cells (using cell objects with s property)
+                const headerStyle = {
+                    font: { bold: true, color: { rgb: "1E3C72" }, sz: 14, name: "Arial" },
+                    alignment: { horizontal: "center", vertical: "center" },
+                    fill: { fgColor: { rgb: "D0D8E8" } }
+                };
+
+                const titleStyle = {
+                    font: { bold: true, color: { rgb: "FFFFFF" }, sz: 16, name: "Arial" },
+                    alignment: { horizontal: "center", vertical: "center" },
+                    fill: { fgColor: { rgb: "1E3C72" } }
+                };
+
+                const subtitleStyle = {
+                    font: { bold: true, color: { rgb: "2A5298" }, sz: 12, name: "Arial" },
+                    alignment: { horizontal: "center", vertical: "center" }
+                };
+
+                const tableHeaderStyle = {
+                    font: { bold: true, color: { rgb: "FFFFFF" }, sz: 11, name: "Arial" },
+                    alignment: { horizontal: "center", vertical: "center" },
+                    fill: { fgColor: { rgb: "1E3C72" } },
+                    border: {
+                        top: { style: "thin", color: { rgb: "1E3C72" } },
+                        bottom: { style: "thin", color: { rgb: "1E3C72" } },
+                        left: { style: "thin", color: { rgb: "1E3C72" } },
+                        right: { style: "thin", color: { rgb: "1E3C72" } }
+                    }
+                };
+
+                const dataStyle = {
+                    font: { sz: 11, name: "Arial" },
+                    alignment: { horizontal: "center", vertical: "center" },
+                    border: {
+                        top: { style: "thin", color: { rgb: "DEE2E6" } },
+                        bottom: { style: "thin", color: { rgb: "DEE2E6" } },
+                        left: { style: "thin", color: { rgb: "DEE2E6" } },
+                        right: { style: "thin", color: { rgb: "DEE2E6" } }
+                    }
+                };
+
+                const footerStyle = {
+                    font: { sz: 10, color: { rgb: "666666" }, name: "Arial" },
+                    alignment: { horizontal: "center", vertical: "center" }
+                };
+
+                // Apply styles to header rows
+                for (let r = 0; r <= 2; r++) {
+                    const cellRef = XLSX.utils.encode_cell({ r: r, c: 0 });
+                    if (ws[cellRef]) ws[cellRef].s = headerStyle;
+                }
+
+                // Title rows
+                const titleRow = 4;
+                const titleCell = XLSX.utils.encode_cell({ r: titleRow, c: 0 });
+                if (ws[titleCell]) ws[titleCell].s = titleStyle;
+
+                const subTitleRow = 5;
+                const subTitleCell = XLSX.utils.encode_cell({ r: subTitleRow, c: 0 });
+                if (ws[subTitleCell]) ws[subTitleCell].s = { ...titleStyle, font: { ...titleStyle.font, sz: 14 } };
+
+                // Info rows
+                for (let r = 6; r <= 7; r++) {
+                    const cellRef = XLSX.utils.encode_cell({ r: r, c: 0 });
+                    if (ws[cellRef]) ws[cellRef].s = subtitleStyle;
+                }
+
+                // Table header row
+                const tableHeaderRow = 9;
+                for (let c = 0; c < 6; c++) {
+                    const cellRef = XLSX.utils.encode_cell({ r: tableHeaderRow, c: c });
+                    if (ws[cellRef]) ws[cellRef].s = tableHeaderStyle;
+                }
+
+                // Data rows styling
+                for (let r = 10; r < 10 + currentRows.length; r++) {
+                    for (let c = 0; c < 6; c++) {
+                        const cellRef = XLSX.utils.encode_cell({ r: r, c: c });
+                        if (ws[cellRef]) {
+                            ws[cellRef].s = dataStyle;
+                            // Alternate row colors
+                            if ((r - 10) % 2 === 1) {
+                                ws[cellRef].s = { ...dataStyle, fill: { fgColor: { rgb: "F8F9FA" } } };
+                            }
+                        }
+                    }
+                }
+
+                // Footer styling
+                for (let r = allData.length - 3; r < allData.length; r++) {
+                    const cellRef = XLSX.utils.encode_cell({ r: r, c: 0 });
+                    if (ws[cellRef]) ws[cellRef].s = footerStyle;
+                }
+
+                XLSX.utils.book_append_sheet(wb, ws, "الأنشطة الشهرية");
+
+                const fileName = 'استمارة_' + month + '_' + year + '_Excel_' + new Date().toISOString().split('T')[0] + '.xlsx';
+                XLSX.writeFile(wb, fileName);
+
+                showNotification('✅ تم تصدير Excel بنجاح (' + currentRows.length + ' سجل)', 'success');
+            } catch (error) {
+                console.error('Error exporting Excel:', error);
+                showNotification('❌ حدث خطأ أثناء تصدير Excel: ' + error.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '📊 تصدير Excel';
+            }
+        }
+
+        // دالة حفظ Excel تراكمي (مثل PDF)
+        async function saveExcel() {
+            const btn = document.getElementById('saveExcelBtn');
+            if (!btn) return;
+            btn.disabled = true;
+            btn.textContent = '⏳ جاري الحفظ...';
+
+            try {
+                const month = document.getElementById('monthSelect').value || 'غير محدد';
+                const year = document.getElementById('yearSelect').value || '2026';
+                const responsibleEmployee = document.getElementById('responsibleEmployee').value || 'غير محدد';
+                const department = document.getElementById('departmentSelect').value || 'غير محددة';
+                const currentRows = collectCurrentData();
+
+                if (!accumulatedPDFData.month) accumulatedPDFData.month = month;
+                if (!accumulatedPDFData.year) accumulatedPDFData.year = year;
+                if (!accumulatedPDFData.responsibleEmployee) accumulatedPDFData.responsibleEmployee = responsibleEmployee;
+                if (!accumulatedPDFData.department) accumulatedPDFData.department = department;
+
+                const mergeResult = mergeRowsWithoutDuplicates(accumulatedPDFData.rows, currentRows);
+                accumulatedPDFData.rows = mergeResult.unique;
+
+                localStorage.setItem('accumulatedPDFData', JSON.stringify(accumulatedPDFData));
+
+                // Create Excel with accumulated data
+                const wb = XLSX.utils.book_new();
+                const allRows = accumulatedPDFData.rows;
+
+                const headerInfo = [
+                    ['وزارة التربية'],
+                    ['مديرية تربية المثنى'],
+                    ['قسم الإعداد والتدريب'],
+                    [''],
+                    ['استمارة نشاطات قسم الإعداد والتدريب'],
+                    ['استمارة الانشطة الشهرية - حفظ تراكمي'],
+                    ['الشهر: ' + accumulatedPDFData.month + ' | السنة: ' + accumulatedPDFData.year],
+                    ['الموظف المسؤول: ' + accumulatedPDFData.responsibleEmployee + ' | الشعبة: ' + accumulatedPDFData.department],
+                    [''],
+                    ['ت', 'اسم النشاط', 'عدد المشتركين', 'جهة التنفيذ', 'الجهة المستفيدة', 'تاريخ التنفيذ']
+                ];
+
+                const dataRows = allRows.map((row, index) => [
+                    index + 1,
+                    row.activityName || '',
+                    row.participants || '',
+                    row.executor || '',
+                    row.beneficiary || '',
+                    row.date || ''
+                ]);
+
+                const footerRows = [
+                    [''],
+                    ['تصميم وبرمجة م. م صفاء هادي عبد العالي - مدير قسم الإعداد والتدريب'],
+                    ['تاريخ الحفظ: ' + new Date().toLocaleDateString('ar-IQ') + ' | نوع العملية: حفظ تراكمي'],
+                    ['عدد السجلات الفريدة: ' + allRows.length]
+                ];
+
+                if (mergeResult.duplicatesCount > 0) {
+                    footerRows.push(['تم حذف ' + mergeResult.duplicatesCount + ' سجل مكرر']);
+                }
+
+                const allData = [...headerInfo, ...dataRows, ...footerRows];
+                const ws = XLSX.utils.aoa_to_sheet(allData);
+
+                ws['!cols'] = [
+                    { wch: 5 }, { wch: 35 }, { wch: 15 }, { wch: 25 }, { wch: 25 }, { wch: 15 }
+                ];
+
+                ws['!merges'] = [
+                    { s: { r: 0, c: 0 }, e: { r: 0, c: 5 } },
+                    { s: { r: 1, c: 0 }, e: { r: 1, c: 5 } },
+                    { s: { r: 2, c: 0 }, e: { r: 2, c: 5 } },
+                    { s: { r: 4, c: 0 }, e: { r: 4, c: 5 } },
+                    { s: { r: 5, c: 0 }, e: { r: 5, c: 5 } },
+                    { s: { r: 6, c: 0 }, e: { r: 6, c: 5 } },
+                    { s: { r: 7, c: 0 }, e: { r: 7, c: 5 } }
+                ];
+
+                // Add footer merges
+                const footerStart = allData.length - footerRows.length;
+                for (let i = 0; i < footerRows.length; i++) {
+                    ws['!merges'].push({
+                        s: { r: footerStart + i, c: 0 },
+                        e: { r: footerStart + i, c: 5 }
+                    });
+                }
+
+                XLSX.utils.book_append_sheet(wb, ws, "الأنشطة التراكمية");
+
+                const fileName = 'استمارة_' + accumulatedPDFData.month + '_' + accumulatedPDFData.year + '_Excel_تراكمي_' + new Date().toISOString().split('T')[0] + '.xlsx';
+                XLSX.writeFile(wb, fileName);
+
+                let msg = '✅ تم حفظ Excel بشكل تراكمي (' + allRows.length + ' سجل فريد)';
+                if (mergeResult.duplicatesCount > 0) {
+                    msg += ' | تم حذف ' + mergeResult.duplicatesCount + ' سجل مكرر';
+                }
+                showNotification(msg, 'success');
+            } catch (error) {
+                console.error('Error saving Excel:', error);
+                showNotification('❌ حدث خطأ أثناء الحفظ', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '💾 حفظ Excel';
+            }
+        }
+
     </script>
 </body>
 </html>
