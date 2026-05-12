@@ -15,7 +15,7 @@
 
         body {
             font-family: 'Arial', 'Tahoma', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #8554b8 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -29,7 +29,6 @@
             overflow: hidden;
         }
 
-        /* الترويسة الرسمية */
         .official-header {
             background: #d0d8e8;
             padding: 20px 40px;
@@ -78,7 +77,6 @@
             font-weight: bold;
         }
 
-        /* العنوان الرئيسي */
         .main-title {
             text-align: center;
             padding: 20px;
@@ -432,6 +430,78 @@
             outline: none;
         }
 
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            color: white;
+        }
+
+        .btn-email {
+            background: linear-gradient(135deg, #ea4335 0%, #fbbc05 100%);
+            color: white;
+        }
+
+        .share-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .share-modal.show {
+            display: flex;
+        }
+
+        .share-modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .share-modal-content h3 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+        }
+
+        .share-modal-content p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .share-modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .share-modal-buttons .btn {
+            min-width: 120px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
         .filter-dropdowns label {
             font-weight: bold;
             color: #2a5298;
@@ -449,38 +519,8 @@
                 min-width: 140px;
                 flex: 1;
             }
-
-
-
-
-edia(max-width: 768px) {
-            .official-footer {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-                padding: 15px 20px;
-            }
-            .footer-left {
-                text-align: center;
-                font-size: 12px;
-            }
-        }
-edia(max-width: 768px) {
-            .official-footer {
-                padding: 15px 20px;
-            }
-            .footer-name {
-                font-size: 18px;
-            }
-            .footer-title {
-                font-size: 14px;
-            }
-            .footer-position {
-                font-size: 13px;
-            }
         }
 
-        /* الفوتر البسيط */
         .official-footer {
             background: #ffffff;
             padding: 15px 40px;
@@ -540,13 +580,8 @@ edia(max-width: 768px) {
                 text-align: center;
                 font-size: 11px;
             }
-        }}
+        }
     </style>
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -559,17 +594,13 @@ edia(max-width: 768px) {
     </div>
 
     <div class="container">
-        <!-- الترويسة الرسمية -->
         <div class="official-header">
             <div class="right-side">
                 <div>وزارة التربية</div>
                 <div>مديرية تربية المثنى</div>
             </div>
             <div class="logo-center">
-                <!-- يمكنك استبدال هذا بصورة الشعار -->
-
-                <!-- أو استخدام صورة: -->
-                 <img src="imag.jpeg">
+                <img src="imag.jpeg">
             </div>
             <div class="left-side">
                 <div>قسم الإعداد والتدريب</div>
@@ -577,7 +608,6 @@ edia(max-width: 768px) {
             </div>
         </div>
 
-        <!-- العنوان الرئيسي -->
         <div class="main-title">
             <h2>استمارة نشاطات قسم الإعداد والتدريب</h2>
         </div>
@@ -627,8 +657,8 @@ edia(max-width: 768px) {
                         <option value="بنين عقيل">بنين عقيل</option>
                         <option value="م.م احمد هاشم">م.م احمد هاشم</option>
                         <option value="م.م علي صباح">م.م علي صباح</option>
-                         <option value="ستار عبد اكعيم">ستار عبد كعيم</option>
-                         <option value="ضرغام ماجد">ضرغام ماجد</option>
+                        <option value="ستار عبد اكعيم">ستار عبد كعيم</option>
+                        <option value="ضرغام ماجد">ضرغام ماجد</option>
                         <option value="م. علي ناجح">م علي ناجح</option>
                         <option value="هديل مكوار">هديل مكوار</option>
                     </select>
@@ -636,7 +666,7 @@ edia(max-width: 768px) {
                 <div class="control-group">
                     <label>الشعب:</label>
                     <select id="departmentSelect">
-                      <option value="مدير القسم">مدير القسم</option>
+                        <option value="مدير القسم">مدير القسم</option>
                         <option value="شعبة التدريب">شعبة التدريب</option>
                         <option value="شعبة المعاهد">شعبة المعاهد</option>
                         <option value="شعبة البحوث والدراسات">شعبة البحوث والدراسات</option>
@@ -658,6 +688,14 @@ edia(max-width: 768px) {
 
             <button class="btn btn-info" onclick="exportToPDF()" id="exportPdfBtn">
                 📄 تصدير PDF
+            </button>
+
+            <button class="btn btn-success" onclick="shareViaWhatsApp()" id="shareWhatsAppBtn" title="إرسال عبر واتساب">
+                📱 واتساب
+            </button>
+
+            <button class="btn btn-warning" onclick="shareViaEmail()" id="shareEmailBtn" title="إرسال عبر البريد الإلكتروني">
+                📧 إيميل
             </button>
 
             <button class="btn btn-primary" onclick="clearAll()">
@@ -683,9 +721,65 @@ edia(max-width: 768px) {
         </div>
     </div>
 
+    <div class="share-modal" id="shareModal">
+        <div class="share-modal-content" style="position:relative;">
+            <span class="close-modal" onclick="closeShareModal()">&times;</span>
+            <h3 id="shareModalTitle">مشاركة الاستمارة</h3>
+            <p id="shareModalText">اختر طريقة المشاركة</p>
+            <div class="share-modal-buttons">
+                <button class="btn btn-whatsapp" onclick="confirmShareWhatsApp()">
+                    📱 واتساب
+                </button>
+                <button class="btn btn-email" onclick="confirmShareEmail()">
+                    📧 إيميل
+                </button>
+                <button class="btn" style="background:#ccc;color:#333;" onclick="closeShareModal()">
+                    إلغاء
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const { jsPDF } = window.jspdf;
         let accumulatedPDFData = { month: '', year: '2026', responsibleEmployee: '', department: '', rows: [] };
+
+        // ✅ دالة الفلترة: إنشاء مفتاح فريد للصف
+        function getRowKey(row) {
+            return JSON.stringify({
+                activityName: (row.activityName || '').trim(),
+                participants: (row.participants || '').trim(),
+                executor: (row.executor || '').trim(),
+                beneficiary: (row.beneficiary || '').trim(),
+                date: (row.date || '').trim()
+            });
+        }
+
+        // ✅ دالة الفلترة: إزالة الصفوف المكررة
+        function filterUniqueRows(rows) {
+            const seen = new Set();
+            const unique = [];
+            let duplicatesCount = 0;
+
+            rows.forEach(row => {
+                const key = getRowKey(row);
+                if (!seen.has(key)) {
+                    seen.add(key);
+                    unique.push(row);
+                } else {
+                    duplicatesCount++;
+                }
+            });
+
+            return { unique, duplicatesCount };
+        }
+
+        // ✅ دالة الفلترة: دمج الصفوف مع إزالة التكرار
+        function mergeRowsWithoutDuplicates(existingRows, newRows) {
+            const combined = [...existingRows, ...newRows];
+            const result = filterUniqueRows(combined);
+            return result;
+        }
 
         function autoResizeTextarea(element) {
             element.style.height = 'auto';
@@ -773,7 +867,7 @@ edia(max-width: 768px) {
                 <td><input type="number" oninput="autoSave()" placeholder="عدد المشتركين"></td>
                 <td><input type="text" oninput="autoSave(); autoResizeInput(this)" placeholder="جهة التنفيذ"></td>
                 <td><input type="text" oninput="autoSave(); autoResizeInput(this)" placeholder="الجهة المستفيدة"></td>
-                 <td><input type="date" onchange="autoSave()" placeholder="تاريخ التنفيذ"></td>
+                <td><input type="date" onchange="autoSave()" placeholder="تاريخ التنفيذ"></td>
             `;
             tbody.appendChild(tr);
             autoSave();
@@ -789,7 +883,7 @@ edia(max-width: 768px) {
                 <td><input type="number" oninput="autoSave()" value="${data.participants || ''}" placeholder="عدد المشتركين"></td>
                 <td><input type="text" oninput="autoSave(); autoResizeInput(this)" value="${data.executor || ''}" placeholder="جهة التنفيذ"></td>
                 <td><input type="text" oninput="autoSave(); autoResizeInput(this)" value="${data.beneficiary || ''}" placeholder="الجهة المستفيدة"></td>
-                 <td><input type="date" onchange="autoSave()" value="${data.date || ''}"></td>
+                <td><input type="date" onchange="autoSave()" value="${data.date || ''}"></td>
             `;
             tbody.appendChild(tr);
             setTimeout(() => {
@@ -818,7 +912,7 @@ edia(max-width: 768px) {
                     participants: inputs[1].value,
                     executor: inputs[2].value,
                     beneficiary: inputs[3].value,
-                  date: inputs[4].value,
+                    date: inputs[4].value,
                 });
             });
             return rows;
@@ -860,7 +954,6 @@ edia(max-width: 768px) {
 
                     let tableHTML = `
                         <div style="text-align:center;margin-bottom:5px;direction:rtl;font-family:Arial,Tahoma,sans-serif;">
-                            <!-- الترويسة الرسمية -->
                             <div style="background:#d0d8e8;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #1e3c72;margin-bottom:10px;">
                                 <div style="text-align:right;color:#1e3c72;font-size:13px;font-weight:bold;line-height:1.6;">
                                     <div>وزارة التربية</div>
@@ -883,7 +976,6 @@ edia(max-width: 768px) {
                             <div style="color:#2a5298;font-size:10px;font-weight:bold;margin-bottom:2px;">
                                 الموظف المسؤول: ${responsibleEmployee || 'غير محدد'} | الشعبة: ${department || 'غير محددة'}
                             </div>
-                            <!-- تاريخ الإنشاء في جهة اليسار -->
                             <div style="text-align:left;color:#666;font-size:8px;margin-top:3px;padding-left:5px;">
                                 تاريخ الإنشاء: ${new Date().toLocaleDateString('ar-IQ')} | نوع العملية: ${type} ${type === 'حفظ' ? '(تراكمي)' : '(فوري)'} | عدد السجلات: ${rows.length} | صفحة ${page + 1} من ${totalPages}
                             </div>
@@ -919,7 +1011,6 @@ edia(max-width: 768px) {
 
                     tableHTML += '</tbody></table>';
 
-                    // إضافة الفوتر في كل صفحة
                     tableHTML += `
                         <div style="display:flex;justify-content:space-between;align-items:flex-end;padding:10px 20px;border-top:1px solid #cccccc;margin-top:10px;font-family:Arial,Tahoma,sans-serif;direction:rtl;font-size:11px;color:#666666;">
                             <div style="text-align:right;">
@@ -933,7 +1024,6 @@ edia(max-width: 768px) {
                     `;
 
                     hiddenContainer.innerHTML = tableHTML;
-
                     hiddenContainer.offsetHeight;
 
                     await new Promise(resolve => setTimeout(resolve, 100));
@@ -965,8 +1055,6 @@ edia(max-width: 768px) {
                     const imgY = margin;
 
                     pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
-
-
                 }
 
                 hiddenContainer.innerHTML = '';
@@ -985,6 +1073,7 @@ edia(max-width: 768px) {
             }
         }
 
+        // ✅ دالة الحفظ المعدلة مع الفلترة
         async function savePDF() {
             const btn = document.getElementById('savePdfBtn');
             btn.disabled = true;
@@ -1002,7 +1091,10 @@ edia(max-width: 768px) {
                 if (!accumulatedPDFData.responsibleEmployee) accumulatedPDFData.responsibleEmployee = responsibleEmployee;
                 if (!accumulatedPDFData.department) accumulatedPDFData.department = department;
 
-                accumulatedPDFData.rows = [...accumulatedPDFData.rows, ...currentRows];
+                // ✅ تطبيق الفلترة: دمج الصفوف مع إزالة التكرار
+                const mergeResult = mergeRowsWithoutDuplicates(accumulatedPDFData.rows, currentRows);
+                accumulatedPDFData.rows = mergeResult.unique;
+
                 localStorage.setItem('accumulatedPDFData', JSON.stringify(accumulatedPDFData));
 
                 const result = await createPDF(
@@ -1016,7 +1108,11 @@ edia(max-width: 768px) {
 
                 if (result) {
                     result.pdf.save(result.fileName);
-                    showNotification(`✅ تم حفظ PDF بشكل تراكمي (${accumulatedPDFData.rows.length} سجل)`, 'success');
+                    let msg = `✅ تم حفظ PDF بشكل تراكمي (${accumulatedPDFData.rows.length} سجل فريد)`;
+                    if (mergeResult.duplicatesCount > 0) {
+                        msg += `\n🗑️ تم حذف ${mergeResult.duplicatesCount} سجل مكرر`;
+                    }
+                    showNotification(msg, 'success');
                 }
             } catch (error) {
                 console.error('Error saving PDF:', error);
@@ -1063,7 +1159,7 @@ edia(max-width: 768px) {
 
         function showNotification(message, type = 'info') {
             const notification = document.getElementById('notification');
-            notification.innerHTML = message;
+            notification.innerHTML = message.replace(/\n/g, '<br>');
             notification.className = 'notification show ' + type;
             setTimeout(() => {
                 notification.classList.remove('show');
@@ -1113,6 +1209,184 @@ edia(max-width: 768px) {
         });
 
         setInterval(autoSave, 30000);
+
+        let currentShareBlob = null;
+        let currentShareFileName = '';
+
+        function showShareModal(title, text) {
+            document.getElementById('shareModalTitle').textContent = title;
+            document.getElementById('shareModalText').textContent = text;
+            document.getElementById('shareModal').classList.add('show');
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').classList.remove('show');
+            currentShareBlob = null;
+            currentShareFileName = '';
+        }
+
+        async function generatePDFForShare() {
+            const month = document.getElementById('monthSelect').value || 'غير محدد';
+            const year = document.getElementById('yearSelect').value || '2026';
+            const responsibleEmployee = document.getElementById('responsibleEmployee').value || 'غير محدد';
+            const department = document.getElementById('departmentSelect').value || 'غير محدد';
+            const currentRows = collectCurrentData();
+
+            if (!currentRows || currentRows.length === 0) {
+                showNotification('⚠️ لا توجد بيانات للمشاركة', 'error');
+                return null;
+            }
+
+            const result = await createPDF(month, year, responsibleEmployee, department, currentRows, 'مشاركة');
+            if (result) {
+                currentShareBlob = result.blob;
+                currentShareFileName = result.fileName;
+                return result;
+            }
+            return null;
+        }
+
+        async function shareViaWhatsApp() {
+            const btn = document.getElementById('shareWhatsAppBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ جاري التحضير...';
+
+            try {
+                const result = await generatePDFForShare();
+                if (result) {
+                    showShareModal(
+                        'مشاركة عبر واتساب',
+                        'سيتم إرسال الاستمارة كملف PDF إلى الرقم: 07832343993\n\nملاحظة: يجب فتح واتساب ويب أو تطبيق واتساب على جهازك'
+                    );
+                }
+            } catch (error) {
+                console.error('Error preparing WhatsApp share:', error);
+                showNotification('❌ حدث خطأ أثناء التحضير', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '📱 واتساب';
+            }
+        }
+
+        async function shareViaEmail() {
+            const btn = document.getElementById('shareEmailBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ جاري التحضير...';
+
+            try {
+                const result = await generatePDFForShare();
+                if (result) {
+                    showShareModal(
+                        'مشاركة عبر البريد الإلكتروني',
+                        'سيتم إرسال الاستمارة كملف PDF عبر البريد الإلكتروني'
+                    );
+                }
+            } catch (error) {
+                console.error('Error preparing email share:', error);
+                showNotification('❌ حدث خطأ أثناء التحضير', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '📧 إيميل';
+            }
+        }
+
+        function confirmShareWhatsApp() {
+            if (!currentShareBlob) {
+                showNotification('❌ لا يوجد ملف للمشاركة', 'error');
+                return;
+            }
+
+            const file = new File([currentShareBlob], currentShareFileName, { type: 'application/pdf' });
+
+            if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                navigator.share({
+                    title: 'استمارة نشاطات قسم الإعداد والتدريب',
+                    text: 'مرفق استمارة النشاطات الشهرية',
+                    files: [file]
+                }).then(() => {
+                    showNotification('✅ تم فتح نافذة المشاركة', 'success');
+                }).catch((error) => {
+                    console.log('Share cancelled or failed:', error);
+                    openWhatsAppWeb();
+                });
+            } else {
+                openWhatsAppWeb();
+            }
+
+            closeShareModal();
+        }
+
+        function openWhatsAppWeb() {
+            const month = document.getElementById('monthSelect').value || 'غير محدد';
+            const year = document.getElementById('yearSelect').value || '2026';
+            const message = encodeURIComponent(
+                'السلام عليكم\n\n' +
+                'مرفق استمارة نشاطات قسم الإعداد والتدريب\n' +
+                'الشهر: ' + month + '\n' +
+                'السنة: ' + year + '\n\n' +
+                'يرجى تحميل الملف المرفق (PDF) من النافذة السابقة أو طلب إعادة الإرسال.'
+            );
+
+            const phoneNumber = '9647832343993';
+            const whatsappUrl = 'https://wa.me/' + phoneNumber + '?text=' + message;
+
+            window.open(whatsappUrl, '_blank');
+            showNotification('📱 تم فتح واتساب. يرجى إرفاق ملف PDF يدوياً', 'info');
+        }
+
+        function confirmShareEmail() {
+            if (!currentShareBlob) {
+                showNotification('❌ لا يوجد ملف للمشاركة', 'error');
+                return;
+            }
+
+            const month = document.getElementById('monthSelect').value || 'غير محدد';
+            const year = document.getElementById('yearSelect').value || '2026';
+            const responsibleEmployee = document.getElementById('responsibleEmployee').value || 'غير محدد';
+
+            const subject = encodeURIComponent('استمارة نشاطات قسم الإعداد والتدريب - ' + month + ' ' + year);
+            const body = encodeURIComponent(
+                'السلام عليكم ورحمة الله وبركاته،\n\n' +
+                'مرفق استمارة نشاطات قسم الإعداد والتدريب للشهر الحالي.\n\n' +
+                'تفاصيل الاستمارة:\n' +
+                '- الشهر: ' + month + '\n' +
+                '- السنة: ' + year + '\n' +
+                '- الموظف المسؤول: ' + responsibleEmployee + '\n\n' +
+                'مع التحية،\n' +
+                'قسم الإعداد والتدريب\n' +
+                'مديرية تربية المثنى'
+            );
+
+            const file = new File([currentShareBlob], currentShareFileName, { type: 'application/pdf' });
+
+            if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                navigator.share({
+                    title: 'استمارة نشاطات قسم الإعداد والتدريب',
+                    text: 'مرفق استمارة النشاطات الشهرية',
+                    files: [file]
+                }).then(() => {
+                    showNotification('✅ تم فتح نافذة المشاركة', 'success');
+                }).catch(() => {
+                    openDefaultEmail(subject, body);
+                });
+            } else {
+                openDefaultEmail(subject, body);
+            }
+
+            closeShareModal();
+        }
+
+        function openDefaultEmail(subject, body) {
+            const mailtoUrl = 'mailto:?subject=' + subject + '&body=' + body;
+            window.open(mailtoUrl, '_blank');
+            showNotification('📧 تم فتح تطبيق البريد الإلكتروني. يرجى إرفاق ملف PDF يدوياً', 'info');
+        }
+
+        document.getElementById('shareModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeShareModal();
+            }
+        });
     </script>
 </body>
 </html>
