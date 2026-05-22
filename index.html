@@ -6,7 +6,6 @@
     <title>استمارة نشاطات قسم الإعداد والتدريب</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -16,7 +15,7 @@
 
         body {
             font-family: 'Arial', 'Tahoma', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #8554b8 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -30,6 +29,7 @@
             overflow: hidden;
         }
 
+        /* الترويسة الرسمية */
         .official-header {
             background: #d0d8e8;
             padding: 20px 40px;
@@ -78,6 +78,7 @@
             font-weight: bold;
         }
 
+        /* العنوان الرئيسي */
         .main-title {
             text-align: center;
             padding: 20px;
@@ -148,57 +149,46 @@
         }
 
         .btn {
-            padding: 12px 25px;
+            padding: 10px 22px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 8px;
+            min-height: 44px;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .btn-primary, .btn-success, .btn-warning, .btn-info {
+            background: #105d6b;
             color: white;
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            color: white;
-        }
-
-        .btn-warning {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-        }
-
-        .btn-info {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-        }
-
-        .btn-excel {
-            background: linear-gradient(135deg, #217346 0%, #107c41 100%);
-            color: white;
-        }
-
-        .btn-excel:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(33, 115, 70, 0.4);
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
+            background: #0a3f49;
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(16, 93, 107, 0.4);
         }
 
         .btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
+        }
+
+        /* أيقونات الأزرار باللون #105d6b */
+        .btn .icon {
+            color: #105d6b;
+            font-size: 18px;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 22px;
         }
 
         .form-container {
@@ -441,78 +431,6 @@
             outline: none;
         }
 
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-            color: white;
-        }
-
-        .btn-email {
-            background: linear-gradient(135deg, #ea4335 0%, #fbbc05 100%);
-            color: white;
-        }
-
-        .share-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .share-modal.show {
-            display: flex;
-        }
-
-        .share-modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-        }
-
-        .share-modal-content h3 {
-            color: #1e3c72;
-            margin-bottom: 20px;
-        }
-
-        .share-modal-content p {
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .share-modal-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .share-modal-buttons .btn {
-            min-width: 120px;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #999;
-        }
-
-        .close-modal:hover {
-            color: #333;
-        }
-
         .filter-dropdowns label {
             font-weight: bold;
             color: #2a5298;
@@ -530,8 +448,38 @@
                 min-width: 140px;
                 flex: 1;
             }
+
+
+
+
+        media(max-width: 768px) {
+            .official-footer {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+            .footer-left {
+                text-align: center;
+                font-size: 12px;
+            }
+        }
+        media(max-width: 768px) {
+            .official-footer {
+                padding: 15px 20px;
+            }
+            .footer-name {
+                font-size: 18px;
+            }
+            .footer-title {
+                font-size: 14px;
+            }
+            .footer-position {
+                font-size: 13px;
+            }
         }
 
+        /* الفوتر البسيط */
         .official-footer {
             background: #ffffff;
             padding: 15px 40px;
@@ -591,9 +539,8 @@
                 text-align: center;
                 font-size: 11px;
             }
-        }
+        }}
     </style>
-<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -606,13 +553,17 @@
     </div>
 
     <div class="container">
+        <!-- الترويسة الرسمية -->
         <div class="official-header">
             <div class="right-side">
                 <div>وزارة التربية</div>
                 <div>مديرية تربية المثنى</div>
             </div>
             <div class="logo-center">
-                <img src="imag.jpeg">
+                <!-- يمكنك استبدال هذا بصورة الشعار -->
+
+                <!-- أو استخدام صورة: -->
+                 <img src="a.png" alt="شعار الوزارة">
             </div>
             <div class="left-side">
                 <div>قسم الإعداد والتدريب</div>
@@ -620,6 +571,7 @@
             </div>
         </div>
 
+        <!-- العنوان الرئيسي -->
         <div class="main-title">
             <h2>استمارة نشاطات قسم الإعداد والتدريب</h2>
         </div>
@@ -669,8 +621,8 @@
                         <option value="بنين عقيل">بنين عقيل</option>
                         <option value="م.م احمد هاشم">م.م احمد هاشم</option>
                         <option value="م.م علي صباح">م.م علي صباح</option>
-                        <option value="ستار عبد اكعيم">ستار عبد كعيم</option>
-                        <option value="ضرغام ماجد">ضرغام ماجد</option>
+                         <option value="ستار عبد اكعيم">ستار عبد كعيم</option>
+                         <option value="ضرغام ماجد">ضرغام ماجد</option>
                         <option value="م. علي ناجح">م علي ناجح</option>
                         <option value="هديل مكوار">هديل مكوار</option>
                     </select>
@@ -678,7 +630,7 @@
                 <div class="control-group">
                     <label>الشعب:</label>
                     <select id="departmentSelect">
-                        <option value="مدير القسم">مدير القسم</option>
+                      <option value="مدير القسم">مدير القسم</option>
                         <option value="شعبة التدريب">شعبة التدريب</option>
                         <option value="شعبة المعاهد">شعبة المعاهد</option>
                         <option value="شعبة البحوث والدراسات">شعبة البحوث والدراسات</option>
@@ -691,35 +643,27 @@
             </div>
 
             <button class="btn btn-primary" onclick="addRow()">
-                ➕ إضافة صف
+                <span class="icon">➕</span> إضافة صف
             </button>
 
             <button class="btn btn-success" onclick="savePDF()" id="savePdfBtn">
-                💾 حفظ PDF
-            </button>
-
-            <button class="btn btn-excel" onclick="saveExcel()" id="saveExcelBtn">
-                💾 حفظ Excel
+                <span class="icon">💾</span> حفظ PDF
             </button>
 
             <button class="btn btn-info" onclick="exportToPDF()" id="exportPdfBtn">
-                📄 تصدير PDF
+                <span class="icon">🖨️</span> طباعة
             </button>
 
-            <button class="btn btn-excel" onclick="exportToExcel()" id="exportExcelBtn">
-                📊 تصدير Excel
+            <button class="btn btn-success" onclick="saveExcel()" id="saveExcelBtn">
+                <span class="icon">📊</span> حفظ Excel
             </button>
 
-            <button class="btn btn-success" onclick="shareViaWhatsApp()" id="shareWhatsAppBtn" title="إرسال عبر واتساب">
-                📱 واتساب
-            </button>
-
-            <button class="btn btn-warning" onclick="shareViaEmail()" id="shareEmailBtn" title="إرسال عبر البريد الإلكتروني">
-                📧 إيميل
+            <button class="btn btn-info" onclick="generateReport()" id="reportBtn">
+                <span class="icon">📈</span> تقرير Excel
             </button>
 
             <button class="btn btn-primary" onclick="clearAll()">
-                🗑️ مسح الكل
+                <span class="icon">🗑️</span> مسح الكل
             </button>
         </div>
 
@@ -728,11 +672,13 @@
                 <thead>
                     <tr>
                         <th>ت</th>
+                        <th>النشاط</th>
                         <th>اسم النشاط</th>
                         <th>عدد المشتركين</th>
                         <th>جهة التنفيذ</th>
                         <th>الجهة المستفيدة</th>
                         <th>تاريخ التنفيذ</th>
+                        <th>الدليل</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -741,65 +687,10 @@
         </div>
     </div>
 
-    <div class="share-modal" id="shareModal">
-        <div class="share-modal-content" style="position:relative;">
-            <span class="close-modal" onclick="closeShareModal()">&times;</span>
-            <h3 id="shareModalTitle">مشاركة الاستمارة</h3>
-            <p id="shareModalText">اختر طريقة المشاركة</p>
-            <div class="share-modal-buttons">
-                <button class="btn btn-whatsapp" onclick="confirmShareWhatsApp()">
-                    📱 واتساب
-                </button>
-                <button class="btn btn-email" onclick="confirmShareEmail()">
-                    📧 إيميل
-                </button>
-                <button class="btn" style="background:#ccc;color:#333;" onclick="closeShareModal()">
-                    إلغاء
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script>
         const { jsPDF } = window.jspdf;
         let accumulatedPDFData = { month: '', year: '2026', responsibleEmployee: '', department: '', rows: [] };
-
-        // ✅ دالة الفلترة: إنشاء مفتاح فريد للصف
-        function getRowKey(row) {
-            return JSON.stringify({
-                activityName: (row.activityName || '').trim(),
-                participants: (row.participants || '').trim(),
-                executor: (row.executor || '').trim(),
-                beneficiary: (row.beneficiary || '').trim(),
-                date: (row.date || '').trim()
-            });
-        }
-
-        // ✅ دالة الفلترة: إزالة الصفوف المكررة
-        function filterUniqueRows(rows) {
-            const seen = new Set();
-            const unique = [];
-            let duplicatesCount = 0;
-
-            rows.forEach(row => {
-                const key = getRowKey(row);
-                if (!seen.has(key)) {
-                    seen.add(key);
-                    unique.push(row);
-                } else {
-                    duplicatesCount++;
-                }
-            });
-
-            return { unique, duplicatesCount };
-        }
-
-        // ✅ دالة الفلترة: دمج الصفوف مع إزالة التكرار
-        function mergeRowsWithoutDuplicates(existingRows, newRows) {
-            const combined = [...existingRows, ...newRows];
-            const result = filterUniqueRows(combined);
-            return result;
-        }
+        let accumulatedExcelData = { month: '', year: '2026', responsibleEmployee: '', department: '', rows: [] };
 
         function autoResizeTextarea(element) {
             element.style.height = 'auto';
@@ -822,7 +713,9 @@
             try {
                 const saved = localStorage.getItem('securityFormData');
                 const savedPDF = localStorage.getItem('accumulatedPDFData');
+                const savedExcel = localStorage.getItem('accumulatedExcelData');
                 if (savedPDF) accumulatedPDFData = JSON.parse(savedPDF);
+                if (savedExcel) accumulatedExcelData = JSON.parse(savedExcel);
                 if (saved) {
                     const data = JSON.parse(saved);
                     document.getElementById('monthSelect').value = data.month || '';
@@ -853,11 +746,13 @@
                     const inputs = tr.querySelectorAll('input, textarea');
                     rows.push({
                         rowNum: tr.querySelector('.row-number').textContent,
-                        activityName: inputs[0].value,
-                        participants: inputs[1].value,
-                        executor: inputs[2].value,
-                        beneficiary: inputs[3].value,
-                        date: inputs[4].value,
+                        activity: inputs[0].value,
+                        activityName: inputs[1].value,
+                        participants: inputs[2].value,
+                        executor: inputs[3].value,
+                        beneficiary: inputs[4].value,
+                        date: inputs[5].value,
+                        evidence: inputs[6].value,
                     });
                 });
                 const data = {
@@ -883,11 +778,13 @@
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td class="row-number">${rowCount}</td>
+                <td><input type="text" oninput="autoSave(); autoResizeInput(this)" placeholder="النشاط"></td>
                 <td><textarea placeholder="اسم النشاط" oninput="autoSave(); autoResizeTextarea(this)"></textarea></td>
                 <td><input type="number" oninput="autoSave()" placeholder="عدد المشتركين"></td>
                 <td><input type="text" oninput="autoSave(); autoResizeInput(this)" placeholder="جهة التنفيذ"></td>
                 <td><input type="text" oninput="autoSave(); autoResizeInput(this)" placeholder="الجهة المستفيدة"></td>
-                <td><input type="date" onchange="autoSave()" placeholder="تاريخ التنفيذ"></td>
+                 <td><input type="date" onchange="autoSave()" placeholder="تاريخ التنفيذ"></td>
+                <td><input type="text" oninput="autoSave(); autoResizeInput(this)" placeholder="الدليل"></td>
             `;
             tbody.appendChild(tr);
             autoSave();
@@ -899,11 +796,13 @@
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td class="row-number">${rowCount}</td>
+                <td><input type="text" oninput="autoSave(); autoResizeInput(this)" value="${data.activity || ''}" placeholder="النشاط"></td>
                 <td><textarea placeholder="اسم النشاط" oninput="autoSave(); autoResizeTextarea(this)">${data.activityName || ''}</textarea></td>
                 <td><input type="number" oninput="autoSave()" value="${data.participants || ''}" placeholder="عدد المشتركين"></td>
                 <td><input type="text" oninput="autoSave(); autoResizeInput(this)" value="${data.executor || ''}" placeholder="جهة التنفيذ"></td>
                 <td><input type="text" oninput="autoSave(); autoResizeInput(this)" value="${data.beneficiary || ''}" placeholder="الجهة المستفيدة"></td>
-                <td><input type="date" onchange="autoSave()" value="${data.date || ''}"></td>
+                 <td><input type="date" onchange="autoSave()" value="${data.date || ''}"></td>
+                <td><input type="text" oninput="autoSave(); autoResizeInput(this)" value="${data.evidence || ''}" placeholder="الدليل"></td>
             `;
             tbody.appendChild(tr);
             setTimeout(() => {
@@ -928,11 +827,13 @@
                 const inputs = tr.querySelectorAll('input, textarea');
                 rows.push({
                     rowNum: tr.querySelector('.row-number').textContent,
-                    activityName: inputs[0].value,
-                    participants: inputs[1].value,
-                    executor: inputs[2].value,
-                    beneficiary: inputs[3].value,
-                    date: inputs[4].value,
+                    activity: inputs[0].value,
+                    activityName: inputs[1].value,
+                    participants: inputs[2].value,
+                    executor: inputs[3].value,
+                    beneficiary: inputs[4].value,
+                    date: inputs[5].value,
+                    evidence: inputs[6].value,
                 });
             });
             return rows;
@@ -980,7 +881,7 @@
                                     <div>مديرية تربية المثنى</div>
                                 </div>
                                 <div style="text-align:center;">
-                                    <img src="imag.jpeg" style="width:70px;height:70px;object-fit:contain;border-radius:8px;" alt="شعار الوزارة">
+                                    <img src="a copy.png" style="width:70px;height:70px;object-fit:contain;border-radius:8px;" alt="شعار الوزارة">
                                 </div>
                                 <div style="text-align:left;color:#1e3c72;font-size:13px;font-weight:bold;line-height:1.6;">
                                     <div>قسم الإعداد والتدريب</div>
@@ -1004,11 +905,13 @@
                             <thead>
                                 <tr style="background:#1e3c72;color:white;">
                                     <th style="border:2px solid #1e3c72;padding:4px 2px;text-align:center;font-size:9px;width:28px;">ت</th>
-                                    <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:170px;">اسم النشاط</th>
+                                    <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:80px;">النشاط</th>
+                                    <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:150px;">اسم النشاط</th>
                                     <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:60px;">عدد المشتركين</th>
-                                    <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:90px;">جهة التنفيذ</th>
-                                    <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:90px;">الجهة المستفيدة</th>
-                                    <th style="border:2px solid #1e3c72;padding:6px;text-align:center;font-size:10px;width:90px;">تاريخ التنفيذ</th>
+                                    <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:80px;">جهة التنفيذ</th>
+                                    <th style="border:2px solid #1e3c72;padding:4px;text-align:center;font-size:9px;width:80px;">الجهة المستفيدة</th>
+                                    <th style="border:2px solid #1e3c72;padding:6px;text-align:center;font-size:10px;width:80px;">تاريخ التنفيذ</th>
+                                    <th style="border:2px solid #1e3c72;padding:6px;text-align:center;font-size:10px;width:80px;">الدليل</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1020,17 +923,18 @@
                         tableHTML += `
                             <tr style="background:${bgColor};">
                                 <td style="border:1px solid #dee2e6;padding:3px 2px;text-align:center;font-size:8px;width:28px;word-wrap:break-word;">${globalIndex + 1}</td>
-                                <td style="border:1px solid #dee2e6;padding:3px;text-align:center;font-size:8px;width:170px;word-wrap:break-word;">${escapeHtml(row.activityName || '')}</td>
+                                <td style="border:1px solid #dee2e6;padding:3px;text-align:center;font-size:8px;width:80px;word-wrap:break-word;">${escapeHtml(row.activity || '')}</td>
+                                <td style="border:1px solid #dee2e6;padding:3px;text-align:center;font-size:8px;width:150px;word-wrap:break-word;">${escapeHtml(row.activityName || '')}</td>
                                 <td style="border:1px solid #dee2e6;padding:3px;text-align:center;font-size:8px;width:60px;word-wrap:break-word;">${escapeHtml(row.participants || '')}</td>
-                                <td style="border:1px solid #dee2e6;padding:3px;text-align:center;font-size:8px;width:90px;word-wrap:break-word;">${escapeHtml(row.executor || '')}</td>
-                                <td style="border:1px solid #dee2e6;padding:3px;text-align:center;font-size:8px;width:90px;word-wrap:break-word;">${escapeHtml(row.beneficiary || '')}</td>
-                                <td style="border:1px solid #dee2e6;padding:5px;text-align:center;font-size:9px;width:90px;word-wrap:break-word;">${escapeHtml(row.date || '')}</td>
+                                <td style="border:1px solid #dee2e6;padding:3px;text-align:center;font-size:8px;width:80px;word-wrap:break-word;">${escapeHtml(row.executor || '')}</td>
+                                <td style="border:1px solid #dee2e6;padding:3px;text-align:center;font-size:8px;width:80px;word-wrap:break-word;">${escapeHtml(row.beneficiary || '')}</td>
+                                <td style="border:1px solid #dee2e6;padding:5px;text-align:center;font-size:9px;width:80px;word-wrap:break-word;">${escapeHtml(row.date || '')}</td>
+                                <td style="border:1px solid #dee2e6;padding:5px;text-align:center;font-size:9px;width:80px;word-wrap:break-word;">${escapeHtml(row.evidence || '')}</td>
                             </tr>
                         `;
                     });
 
                     tableHTML += '</tbody></table>';
-
                     tableHTML += `
                         <div style="display:flex;justify-content:space-between;align-items:flex-end;padding:10px 20px;border-top:1px solid #cccccc;margin-top:10px;font-family:Arial,Tahoma,sans-serif;direction:rtl;font-size:11px;color:#666666;">
                             <div style="text-align:right;">
@@ -1045,7 +949,6 @@
 
                     hiddenContainer.innerHTML = tableHTML;
                     hiddenContainer.offsetHeight;
-
                     await new Promise(resolve => setTimeout(resolve, 100));
 
                     const canvas = await html2canvas(hiddenContainer, {
@@ -1066,26 +969,17 @@
                     const margin = 8;
                     const availableWidth = pdfWidth - (margin * 2);
                     const availableHeight = pdfHeight - (margin * 2);
-
                     const imgWidth = canvas.width;
                     const imgHeight = canvas.height;
                     const ratio = Math.min(availableWidth / imgWidth, availableHeight / imgHeight);
-
                     const imgX = margin + (availableWidth - imgWidth * ratio) / 2;
                     const imgY = margin;
-
                     pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
                 }
 
                 hiddenContainer.innerHTML = '';
-
                 const fileName = `استمارة_${month}_${year}_${type}_${new Date().toISOString().split('T')[0]}.pdf`;
-
-                return {
-                    pdf: pdf,
-                    fileName: fileName,
-                    blob: pdf.output('blob')
-                };
+                return { pdf: pdf, fileName: fileName };
             } catch (error) {
                 console.error('Error creating PDF:', error);
                 showNotification('❌ حدث خطأ أثناء إنشاء PDF: ' + error.message, 'error');
@@ -1093,11 +987,10 @@
             }
         }
 
-        // ✅ دالة الحفظ المعدلة مع الفلترة
         async function savePDF() {
             const btn = document.getElementById('savePdfBtn');
             btn.disabled = true;
-            btn.textContent = '⏳ جاري الحفظ...';
+            btn.innerHTML = '<span class="icon">⏳</span> جاري إنشاء المعاينة...';
 
             try {
                 const month = document.getElementById('monthSelect').value || 'غير محدد';
@@ -1106,15 +999,19 @@
                 const department = document.getElementById('departmentSelect').value || 'غير محدد';
                 const currentRows = collectCurrentData();
 
+                if (!currentRows || currentRows.length === 0) {
+                    showNotification('⚠️ لا توجد بيانات لحفظها', 'error');
+                    btn.disabled = false;
+                    btn.innerHTML = '<span class="icon">💾</span> حفظ PDF';
+                    return;
+                }
+
                 if (!accumulatedPDFData.month) accumulatedPDFData.month = month;
                 if (!accumulatedPDFData.year) accumulatedPDFData.year = year;
                 if (!accumulatedPDFData.responsibleEmployee) accumulatedPDFData.responsibleEmployee = responsibleEmployee;
                 if (!accumulatedPDFData.department) accumulatedPDFData.department = department;
 
-                // ✅ تطبيق الفلترة: دمج الصفوف مع إزالة التكرار
-                const mergeResult = mergeRowsWithoutDuplicates(accumulatedPDFData.rows, currentRows);
-                accumulatedPDFData.rows = mergeResult.unique;
-
+                accumulatedPDFData.rows = [...accumulatedPDFData.rows, ...currentRows];
                 localStorage.setItem('accumulatedPDFData', JSON.stringify(accumulatedPDFData));
 
                 const result = await createPDF(
@@ -1126,27 +1023,76 @@
                     'حفظ'
                 );
 
-                if (result) {
-                    result.pdf.save(result.fileName);
-                    let msg = `✅ تم حفظ PDF بشكل تراكمي (${accumulatedPDFData.rows.length} سجل فريد)`;
-                    if (mergeResult.duplicatesCount > 0) {
-                        msg += `\n🗑️ تم حذف ${mergeResult.duplicatesCount} سجل مكرر`;
-                    }
-                    showNotification(msg, 'success');
+                if (result && result.pdf) {
+                    const pdfData = result.pdf.output('datauristring');
+
+                    const previewModal = document.createElement('div');
+                    previewModal.id = 'pdfPreviewModal';
+                    previewModal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;';
+
+                    const previewContent = document.createElement('div');
+                    previewContent.style.cssText = 'background:white;border-radius:15px;padding:20px;max-width:95%;max-height:95%;overflow:auto;direction:rtl;box-shadow:0 10px 40px rgba(0,0,0,0.5);';
+
+                    const previewTitle = document.createElement('h3');
+                    previewTitle.textContent = 'معاينة الاستمارة قبل الحفظ';
+                    previewTitle.style.cssText = 'color:#1e3c72;text-align:center;margin-bottom:15px;font-size:20px;';
+
+                    const iframe = document.createElement('iframe');
+                    iframe.src = pdfData;
+                    iframe.style.cssText = 'width:850px;height:550px;border:3px solid #1e3c72;border-radius:8px;background:white;';
+                    iframe.setAttribute('type', 'application/pdf');
+
+                    const infoDiv = document.createElement('div');
+                    infoDiv.style.cssText = 'text-align:center;margin:10px 0;color:#666;font-size:14px;';
+                    infoDiv.innerHTML = `عدد السجلات: <strong>${accumulatedPDFData.rows.length}</strong> | الشهر: ${accumulatedPDFData.month} | السنة: ${accumulatedPDFData.year}`;
+
+                    const buttonsDiv = document.createElement('div');
+                    buttonsDiv.style.cssText = 'display:flex;gap:15px;justify-content:center;margin-top:20px;';
+
+                    const confirmBtn = document.createElement('button');
+                    confirmBtn.innerHTML = '<span class="icon">💾</span> تأكيد الحفظ';
+                    confirmBtn.className = 'btn btn-primary';
+                    confirmBtn.style.cssText = 'padding:12px 30px;font-size:16px;';
+                    confirmBtn.onclick = () => {
+                        result.pdf.save(result.fileName);
+                        showNotification(`✅ تم حفظ PDF بشكل تراكمي (${accumulatedPDFData.rows.length} سجل)`, 'success');
+                        document.body.removeChild(previewModal);
+                    };
+
+                    const cancelBtn = document.createElement('button');
+                    cancelBtn.innerHTML = '<span class="icon">❌</span> إلغاء';
+                    cancelBtn.className = 'btn btn-warning';
+                    cancelBtn.style.cssText = 'padding:12px 30px;font-size:16px;';
+                    cancelBtn.onclick = () => {
+                        document.body.removeChild(previewModal);
+                        showNotification('❌ تم إلغاء الحفظ', 'info');
+                    };
+
+                    buttonsDiv.appendChild(confirmBtn);
+                    buttonsDiv.appendChild(cancelBtn);
+
+                    previewContent.appendChild(previewTitle);
+                    previewContent.appendChild(infoDiv);
+                    previewContent.appendChild(iframe);
+                    previewContent.appendChild(buttonsDiv);
+                    previewModal.appendChild(previewContent);
+                    document.body.appendChild(previewModal);
+                } else {
+                    showNotification('❌ فشل في إنشاء PDF', 'error');
                 }
             } catch (error) {
                 console.error('Error saving PDF:', error);
-                showNotification('❌ حدث خطأ أثناء الحفظ', 'error');
+                showNotification('❌ حدث خطأ أثناء الحفظ: ' + error.message, 'error');
             } finally {
                 btn.disabled = false;
-                btn.textContent = '💾 حفظ PDF';
+                btn.innerHTML = '<span class="icon">💾</span> حفظ PDF';
             }
         }
 
         async function exportToPDF() {
             const btn = document.getElementById('exportPdfBtn');
             btn.disabled = true;
-            btn.textContent = '⏳ جاري التصدير...';
+            btn.innerHTML = '<span class="icon">⏳</span> جاري إنشاء المعاينة...';
 
             try {
                 const month = document.getElementById('monthSelect').value || 'غير محدد';
@@ -1154,6 +1100,13 @@
                 const responsibleEmployee = document.getElementById('responsibleEmployee').value || 'غير محدد';
                 const department = document.getElementById('departmentSelect').value || 'غير محدد';
                 const currentRows = collectCurrentData();
+
+                if (!currentRows || currentRows.length === 0) {
+                    showNotification('⚠️ لا توجد بيانات للطباعة', 'error');
+                    btn.disabled = false;
+                    btn.innerHTML = '<span class="icon">🖨️</span> طباعة';
+                    return;
+                }
 
                 const result = await createPDF(
                     month,
@@ -1164,41 +1117,521 @@
                     'تصدير'
                 );
 
-                if (result) {
-                    result.pdf.save(result.fileName);
-                    showNotification(`✅ تم تصدير PDF (${currentRows.length} سجل)`, 'success');
+                if (result && result.pdf) {
+                    const pdfData = result.pdf.output('datauristring');
+
+                    const previewModal = document.createElement('div');
+                    previewModal.id = 'printPreviewModal';
+                    previewModal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;';
+
+                    const previewContent = document.createElement('div');
+                    previewContent.style.cssText = 'background:white;border-radius:15px;padding:20px;max-width:95%;max-height:95%;overflow:auto;direction:rtl;box-shadow:0 10px 40px rgba(0,0,0,0.5);';
+
+                    const previewTitle = document.createElement('h3');
+                    previewTitle.textContent = 'معاينة قبل الطباعة';
+                    previewTitle.style.cssText = 'color:#1e3c72;text-align:center;margin-bottom:15px;font-size:20px;';
+
+                    const iframe = document.createElement('iframe');
+                    iframe.src = pdfData;
+                    iframe.style.cssText = 'width:850px;height:550px;border:3px solid #1e3c72;border-radius:8px;background:white;';
+                    iframe.setAttribute('type', 'application/pdf');
+
+                    const infoDiv = document.createElement('div');
+                    infoDiv.style.cssText = 'text-align:center;margin:10px 0;color:#666;font-size:14px;';
+                    infoDiv.innerHTML = `عدد السجلات: <strong>${currentRows.length}</strong> | الشهر: ${month} | السنة: ${year}`;
+
+                    const buttonsDiv = document.createElement('div');
+                    buttonsDiv.style.cssText = 'display:flex;gap:15px;justify-content:center;margin-top:20px;';
+
+                    const printBtn = document.createElement('button');
+                    printBtn.innerHTML = '<span class="icon">🖨️</span> طباعة الآن';
+                    printBtn.className = 'btn btn-info';
+                    printBtn.style.cssText = 'padding:12px 30px;font-size:16px;';
+                    printBtn.onclick = () => {
+                        const printWindow = window.open(pdfData, '_blank');
+                        if (printWindow) {
+                            printWindow.onload = function() {
+                                setTimeout(() => { printWindow.print(); }, 500);
+                            };
+                            showNotification(`✅ تم فتح نافذة الطباعة (${currentRows.length} سجل)`, 'success');
+                        } else {
+                            showNotification('⚠️ تم حظر النافذة المنبثقة، يرجى السماح بالنوافذ المنبثقة', 'error');
+                        }
+                        document.body.removeChild(previewModal);
+                    };
+
+                    const saveBtn = document.createElement('button');
+                    saveBtn.innerHTML = '<span class="icon">💾</span> حفظ كملف';
+                    saveBtn.className = 'btn btn-success';
+                    saveBtn.style.cssText = 'padding:12px 30px;font-size:16px;';
+                    saveBtn.onclick = () => {
+                        result.pdf.save(result.fileName);
+                        showNotification(`✅ تم حفظ الملف (${currentRows.length} سجل)`, 'success');
+                        document.body.removeChild(previewModal);
+                    };
+
+                    const cancelBtn = document.createElement('button');
+                    cancelBtn.innerHTML = '<span class="icon">❌</span> إلغاء';
+                    cancelBtn.className = 'btn btn-warning';
+                    cancelBtn.style.cssText = 'padding:12px 30px;font-size:16px;';
+                    cancelBtn.onclick = () => {
+                        document.body.removeChild(previewModal);
+                        showNotification('❌ تم إلغاء الطباعة', 'info');
+                    };
+
+                    buttonsDiv.appendChild(printBtn);
+                    buttonsDiv.appendChild(saveBtn);
+                    buttonsDiv.appendChild(cancelBtn);
+
+                    previewContent.appendChild(previewTitle);
+                    previewContent.appendChild(infoDiv);
+                    previewContent.appendChild(iframe);
+                    previewContent.appendChild(buttonsDiv);
+                    previewModal.appendChild(previewContent);
+                    document.body.appendChild(previewModal);
+                } else {
+                    showNotification('❌ فشل في إنشاء PDF للطباعة', 'error');
                 }
             } catch (error) {
                 console.error('Error exporting PDF:', error);
-                showNotification('❌ حدث خطأ أثناء التصدير', 'error');
+                showNotification('❌ حدث خطأ أثناء الطباعة: ' + error.message, 'error');
             } finally {
                 btn.disabled = false;
-                btn.textContent = '📄 تصدير PDF';
+                btn.innerHTML = '<span class="icon">🖨️</span> طباعة';
             }
         }
 
         function showNotification(message, type = 'info') {
             const notification = document.getElementById('notification');
-            notification.innerHTML = message.replace(/\n/g, '<br>');
+            notification.innerHTML = message;
             notification.className = 'notification show ' + type;
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 5000);
         }
 
+        // ========== FIXED saveExcel FUNCTION ==========
+        async function saveExcel() {
+            const btn = document.getElementById('saveExcelBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="icon">⏳</span> جاري إنشاء Excel...';
+
+            try {
+                const month = document.getElementById('monthSelect').value || 'غير محدد';
+                const year = document.getElementById('yearSelect').value || '2026';
+                const responsibleEmployee = document.getElementById('responsibleEmployee').value || 'غير محدد';
+                const department = document.getElementById('departmentSelect').value || 'غير محدد';
+                const currentRows = collectCurrentData();
+
+                if (!currentRows || currentRows.length === 0) {
+                    showNotification('⚠️ لا توجد بيانات لحفظها', 'error');
+                    btn.disabled = false;
+                    btn.innerHTML = '<span class="icon">📊</span> حفظ Excel';
+                    return;
+                }
+
+                // Initialize accumulated data if empty
+                if (!accumulatedExcelData.month) accumulatedExcelData.month = month;
+                if (!accumulatedExcelData.year) accumulatedExcelData.year = year;
+                if (!accumulatedExcelData.responsibleEmployee) accumulatedExcelData.responsibleEmployee = responsibleEmployee;
+                if (!accumulatedExcelData.department) accumulatedExcelData.department = department;
+
+                // Add current rows to accumulated data
+                accumulatedExcelData.rows = [...accumulatedExcelData.rows, ...currentRows];
+                localStorage.setItem('accumulatedExcelData', JSON.stringify(accumulatedExcelData));
+
+                // Create Excel content as HTML table for better compatibility
+                let excelContent = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">';
+                excelContent += '<head><meta charset="UTF-8"><style>table{border-collapse:collapse;}th{background:#1e3c72;color:white;padding:8px;border:1px solid #000;}td{padding:6px;border:1px solid #ccc;text-align:center;}</style></head><body>';
+
+                // Header info
+                excelContent += '<h2 style="text-align:center;color:#1e3c72;">استمارة نشاطات قسم الإعداد والتدريب</h2>';
+                excelContent += '<h3 style="text-align:center;color:#2a5298;">استمارة الانشطة الشهرية</h3>';
+                excelContent += `<p style="text-align:center;"><strong>الشهر:</strong> ${accumulatedExcelData.month} | <strong>السنة:</strong> ${accumulatedExcelData.year}</p>`;
+                excelContent += `<p style="text-align:center;"><strong>الموظف المسؤول:</strong> ${accumulatedExcelData.responsibleEmployee} | <strong>الشعبة:</strong> ${accumulatedExcelData.department}</p>`;
+                excelContent += `<p style="text-align:center;"><strong>تاريخ الإنشاء:</strong> ${new Date().toLocaleDateString('ar-IQ')} | <strong>عدد السجلات:</strong> ${accumulatedExcelData.rows.length}</p>`;
+                excelContent += '<br>';
+
+                // Table
+                excelContent += '<table dir="rtl">';
+                excelContent += '<tr><th>ت</th><th>النشاط</th><th>اسم النشاط</th><th>عدد المشتركين</th><th>جهة التنفيذ</th><th>الجهة المستفيدة</th><th>تاريخ التنفيذ</th><th>الدليل</th></tr>';
+
+                accumulatedExcelData.rows.forEach((row, index) => {
+                    const bgColor = index % 2 === 0 ? '#ffffff' : '#f0f4f8';
+                    excelContent += `<tr style="background:${bgColor}">`;
+                    excelContent += `<td>${index + 1}</td>`;
+                    excelContent += `<td>${escapeHtml(row.activity || '')}</td>`;
+                    excelContent += `<td>${escapeHtml(row.activityName || '')}</td>`;
+                    excelContent += `<td>${escapeHtml(row.participants || '')}</td>`;
+                    excelContent += `<td>${escapeHtml(row.executor || '')}</td>`;
+                    excelContent += `<td>${escapeHtml(row.beneficiary || '')}</td>`;
+                    excelContent += `<td>${escapeHtml(row.date || '')}</td>`;
+                    excelContent += `<td>${escapeHtml(row.evidence || '')}</td>`;
+                    excelContent += '</tr>';
+                });
+
+                excelContent += '</table>';
+                excelContent += '<br><p style="text-align:center;font-size:12px;color:#666;">تصميم وبرمجة: م.م صفاء هادي عبد العالي - مدير قسم الإعداد والتدريب | وزارة التربية - مديرية تربية المثنى</p>';
+                excelContent += '</body></html>';
+
+                // Create blob and download
+                const blob = new Blob([excelContent], { type: 'application/vnd.ms-excel;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+
+                // Create preview modal
+                const previewModal = document.createElement('div');
+                previewModal.id = 'excelPreviewModal';
+                previewModal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;';
+
+                const previewContent = document.createElement('div');
+                previewContent.style.cssText = 'background:white;border-radius:15px;padding:20px;max-width:95%;max-height:95%;overflow:auto;direction:rtl;box-shadow:0 10px 40px rgba(0,0,0,0.5);';
+
+                const previewTitle = document.createElement('h3');
+                previewTitle.textContent = 'معاينة الاستمارة قبل الحفظ (Excel)';
+                previewTitle.style.cssText = 'color:#1e3c72;text-align:center;margin-bottom:15px;font-size:20px;';
+
+                const infoDiv = document.createElement('div');
+                infoDiv.style.cssText = 'text-align:center;margin:10px 0;color:#666;font-size:14px;';
+                infoDiv.innerHTML = `عدد السجلات: <strong>${accumulatedExcelData.rows.length}</strong> | الشهر: ${accumulatedExcelData.month} | السنة: ${accumulatedExcelData.year}`;
+
+                // Create preview table
+                const previewTable = document.createElement('table');
+                previewTable.style.cssText = 'width:100%;border-collapse:collapse;margin-bottom:20px;direction:rtl;';
+
+                // Header row
+                const headerRow = document.createElement('tr');
+                ['ت', 'النشاط', 'اسم النشاط', 'عدد المشتركين', 'جهة التنفيذ', 'الجهة المستفيدة', 'تاريخ التنفيذ', 'الدليل'].forEach(header => {
+                    const th = document.createElement('th');
+                    th.textContent = header;
+                    th.style.cssText = 'background:#1e3c72;color:white;padding:10px;border:1px solid #dee2e6;text-align:center;font-size:13px;';
+                    headerRow.appendChild(th);
+                });
+                previewTable.appendChild(headerRow);
+
+                // Data rows (show first 20 rows in preview)
+                const previewRows = accumulatedExcelData.rows.slice(0, 20);
+                previewRows.forEach((row, index) => {
+                    const tr = document.createElement('tr');
+                    tr.style.background = index % 2 === 0 ? '#ffffff' : '#f8f9fa';
+
+                    [index + 1, row.activity, row.activityName, row.participants, row.executor, row.beneficiary, row.date, row.evidence].forEach(cell => {
+                        const td = document.createElement('td');
+                        td.textContent = cell || '';
+                        td.style.cssText = 'border:1px solid #dee2e6;padding:8px;text-align:center;font-size:12px;';
+                        tr.appendChild(td);
+                    });
+                    previewTable.appendChild(tr);
+                });
+
+                if (accumulatedExcelData.rows.length > 20) {
+                    const moreRow = document.createElement('tr');
+                    const moreTd = document.createElement('td');
+                    moreTd.colSpan = 8;
+                    moreTd.textContent = `... و ${accumulatedExcelData.rows.length - 20} سجل آخر`;
+                    moreTd.style.cssText = 'text-align:center;padding:10px;color:#666;font-style:italic;';
+                    moreRow.appendChild(moreTd);
+                    previewTable.appendChild(moreRow);
+                }
+
+                const buttonsDiv = document.createElement('div');
+                buttonsDiv.style.cssText = 'display:flex;gap:15px;justify-content:center;margin-top:20px;';
+
+                const confirmBtn = document.createElement('button');
+                confirmBtn.innerHTML = '<span class="icon">📊</span> تأكيد الحفظ';
+                confirmBtn.className = 'btn btn-success';
+                confirmBtn.style.cssText = 'padding:12px 30px;font-size:16px;';
+                confirmBtn.onclick = () => {
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `استمارة_${accumulatedExcelData.month}_${accumulatedExcelData.year}_Excel_${new Date().toISOString().split('T')[0]}.xls`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                    showNotification(`✅ تم حفظ Excel بشكل تراكمي (${accumulatedExcelData.rows.length} سجل)`, 'success');
+                    document.body.removeChild(previewModal);
+                };
+
+                const cancelBtn = document.createElement('button');
+                cancelBtn.innerHTML = '<span class="icon">❌</span> إلغاء';
+                cancelBtn.className = 'btn btn-warning';
+                cancelBtn.style.cssText = 'padding:12px 30px;font-size:16px;';
+                cancelBtn.onclick = () => {
+                    document.body.removeChild(previewModal);
+                    URL.revokeObjectURL(url);
+                    showNotification('❌ تم إلغاء الحفظ', 'info');
+                };
+
+                buttonsDiv.appendChild(confirmBtn);
+                buttonsDiv.appendChild(cancelBtn);
+
+                previewContent.appendChild(previewTitle);
+                previewContent.appendChild(infoDiv);
+                previewContent.appendChild(previewTable);
+                previewContent.appendChild(buttonsDiv);
+                previewModal.appendChild(previewContent);
+                document.body.appendChild(previewModal);
+
+            } catch (error) {
+                console.error('Error saving Excel:', error);
+                showNotification('❌ حدث خطأ أثناء حفظ Excel: ' + error.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<span class="icon">📊</span> حفظ Excel';
+            }
+        }
+
+        // ========== FIXED generateReport FUNCTION ==========
+        async function generateReport() {
+            const btn = document.getElementById('reportBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="icon">⏳</span> جاري إنشاء التقرير...';
+
+            try {
+                const month = document.getElementById('monthSelect').value || 'غير محدد';
+                const year = document.getElementById('yearSelect').value || '2026';
+                const responsibleEmployee = document.getElementById('responsibleEmployee').value || 'غير محدد';
+                const department = document.getElementById('departmentSelect').value || 'غير محدد';
+
+                // Get all data - from accumulated Excel + current
+                let allRows = [];
+                const savedExcel = localStorage.getItem('accumulatedExcelData');
+                if (savedExcel) {
+                    const parsed = JSON.parse(savedExcel);
+                    allRows = parsed.rows || [];
+                }
+
+                // Add current rows if any
+                const currentRows = collectCurrentData();
+                if (currentRows.length > 0) {
+                    allRows = [...allRows, ...currentRows];
+                }
+
+                if (allRows.length === 0) {
+                    showNotification('⚠️ لا توجد بيانات لإنشاء التقرير', 'error');
+                    btn.disabled = false;
+                    btn.innerHTML = '<span class="icon">📈</span> تقرير Excel';
+                    return;
+                }
+
+                // Group activities by "activity" field
+                const grouped = {};
+                allRows.forEach(row => {
+                    const activityKey = (row.activity || row.activityName || 'غير محدد').trim();
+                    if (!grouped[activityKey]) {
+                        grouped[activityKey] = {
+                            activityName: row.activityName || activityKey,
+                            count: 0,
+                            totalParticipants: 0,
+                            executors: new Set(),
+                            dates: new Set(),
+                            evidences: new Set(),
+                            details: []
+                        };
+                    }
+                    grouped[activityKey].count++;
+                    grouped[activityKey].totalParticipants += parseInt(row.participants) || 0;
+                    if (row.executor) grouped[activityKey].executors.add(row.executor);
+                    if (row.date) grouped[activityKey].dates.add(row.date);
+                    if (row.evidence) grouped[activityKey].evidences.add(row.evidence);
+                    grouped[activityKey].details.push({
+                        activityName: row.activityName,
+                        participants: row.participants,
+                        executor: row.executor,
+                        beneficiary: row.beneficiary,
+                        date: row.date,
+                        evidence: row.evidence
+                    });
+                });
+
+                // Create Excel content as HTML
+                let excelContent = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">';
+                excelContent += '<head><meta charset="UTF-8"><style>table{border-collapse:collapse;width:100%;}th{background:#1e3c72;color:white;padding:10px;border:1px solid #000;text-align:center;}td{padding:8px;border:1px solid #ccc;text-align:center;}</style></head><body>';
+
+                // Report Header
+                excelContent += '<h2 style="text-align:center;color:#1e3c72;">تقرير نشاطات قسم الإعداد والتدريب</h2>';
+                excelContent += '<h3 style="text-align:center;color:#2a5298;">تقرير مجمع للأنشطة المتشابهة</h3>';
+                excelContent += `<p style="text-align:center;"><strong>الشهر:</strong> ${month} | <strong>السنة:</strong> ${year}</p>`;
+                excelContent += `<p style="text-align:center;"><strong>الموظف المسؤول:</strong> ${responsibleEmployee} | <strong>الشعبة:</strong> ${department}</p>`;
+                excelContent += `<p style="text-align:center;"><strong>تاريخ الإنشاء:</strong> ${new Date().toLocaleDateString('ar-IQ')} | <strong>إجمالي السجلات:</strong> ${allRows.length} | <strong>عدد الأنشطة المختلفة:</strong> ${Object.keys(grouped).length}</p>`;
+                excelContent += '<br>';
+
+                // Summary Table
+                excelContent += '<h3 style="color:#1e3c72;text-align:right;">ملخص الأنشطة</h3>';
+                excelContent += '<table dir="rtl">';
+                excelContent += '<tr><th>النشاط</th><th>اسم النشاط</th><th>عدد المرات</th><th>إجمالي المشتركين</th><th>جهة التنفيذ</th><th>تاريخ التنفيذ</th><th>الدليل</th></tr>';
+
+                Object.entries(grouped).forEach(([activityKey, data]) => {
+                    const executorsList = Array.from(data.executors).join('، ');
+                    const datesList = Array.from(data.dates).join('، ');
+                    const evidencesList = Array.from(data.evidences).join('، ');
+
+                    excelContent += `<tr>`;
+                    excelContent += `<td><strong>${activityKey}</strong></td>`;
+                    excelContent += `<td>${data.activityName}</td>`;
+                    excelContent += `<td style="background:#e8f4f8;font-weight:bold;">${data.count}</td>`;
+                    excelContent += `<td style="background:#e8f8e8;font-weight:bold;">${data.totalParticipants}</td>`;
+                    excelContent += `<td>${executorsList}</td>`;
+                    excelContent += `<td>${datesList}</td>`;
+                    excelContent += `<td>${evidencesList}</td>`;
+                    excelContent += `</tr>`;
+                });
+
+                excelContent += '</table>';
+                excelContent += '<br><br>';
+
+                // Detailed breakdown
+                excelContent += '<h3 style="color:#1e3c72;text-align:right;">تفاصيل كل نشاط</h3>';
+
+                Object.entries(grouped).forEach(([activityKey, data]) => {
+                    excelContent += `<h4 style="color:#2a5298;background:#f0f4f8;padding:10px;border-radius:5px;">${activityKey} (عدد المرات: ${data.count} | إجمالي المشتركين: ${data.totalParticipants})</h4>`;
+                    excelContent += '<table dir="rtl">';
+                    excelContent += '<tr><th>ت</th><th>النشاط</th><th>اسم النشاط</th><th>عدد المشتركين</th><th>جهة التنفيذ</th><th>الجهة المستفيدة</th><th>تاريخ التنفيذ</th><th>الدليل</th></tr>';
+
+                    data.details.forEach((detail, idx) => {
+                        const bgColor = idx % 2 === 0 ? '#ffffff' : '#f8f9fa';
+                        excelContent += `<tr style="background:${bgColor}">`;
+                        excelContent += `<td>${idx + 1}</td>`;
+                        excelContent += `<td>${activityKey}</td>`;
+                        excelContent += `<td>${detail.activityName || ''}</td>`;
+                        excelContent += `<td>${detail.participants || ''}</td>`;
+                        excelContent += `<td>${detail.executor || ''}</td>`;
+                        excelContent += `<td>${detail.beneficiary || ''}</td>`;
+                        excelContent += `<td>${detail.date || ''}</td>`;
+                        excelContent += `<td>${detail.evidence || ''}</td>`;
+                        excelContent += `</tr>`;
+                    });
+
+                    excelContent += '</table><br>';
+                });
+
+                // Footer
+                excelContent += '<br><p style="text-align:center;font-size:12px;color:#666;">تصميم وبرمجة: م.م صفاء هادي عبد العالي - مدير قسم الإعداد والتدريب | وزارة التربية - مديرية تربية المثنى</p>';
+                excelContent += '</body></html>';
+
+                // Create blob
+                const blob = new Blob([excelContent], { type: 'application/vnd.ms-excel;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+
+                // Create preview modal
+                const previewModal = document.createElement('div');
+                previewModal.id = 'reportPreviewModal';
+                previewModal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;';
+
+                const previewContent = document.createElement('div');
+                previewContent.style.cssText = 'background:white;border-radius:15px;padding:20px;max-width:95%;max-height:95%;overflow:auto;direction:rtl;box-shadow:0 10px 40px rgba(0,0,0,0.5);';
+
+                const previewTitle = document.createElement('h3');
+                previewTitle.textContent = 'تقرير الأنشطة - معاينة قبل الحفظ';
+                previewTitle.style.cssText = 'color:#1e3c72;text-align:center;margin-bottom:15px;font-size:20px;';
+
+                const infoDiv = document.createElement('div');
+                infoDiv.style.cssText = 'text-align:center;margin:10px 0;color:#666;font-size:14px;';
+                infoDiv.innerHTML = `عدد الأنشطة المختلفة: <strong>${Object.keys(grouped).length}</strong> | إجمالي السجلات: ${allRows.length}`;
+
+                // Summary table for preview
+                const summaryTable = document.createElement('table');
+                summaryTable.style.cssText = 'width:100%;border-collapse:collapse;margin-bottom:20px;direction:rtl;';
+
+                const summaryHeaderRow = document.createElement('tr');
+                ['النشاط', 'عدد المرات', 'إجمالي المشتركين', 'جهة التنفيذ', 'تواريخ التنفيذ'].forEach(header => {
+                    const th = document.createElement('th');
+                    th.textContent = header;
+                    th.style.cssText = 'background:#1e3c72;color:white;padding:10px;border:1px solid #dee2e6;text-align:center;font-size:13px;';
+                    summaryHeaderRow.appendChild(th);
+                });
+                summaryTable.appendChild(summaryHeaderRow);
+
+                Object.entries(grouped).forEach(([activityKey, data], index) => {
+                    const tr = document.createElement('tr');
+                    tr.style.background = index % 2 === 0 ? '#ffffff' : '#f8f9fa';
+
+                    [activityKey, data.count, data.totalParticipants, Array.from(data.executors).join('، '), Array.from(data.dates).join('، ')].forEach(cell => {
+                        const td = document.createElement('td');
+                        td.textContent = cell || '';
+                        td.style.cssText = 'border:1px solid #dee2e6;padding:8px;text-align:center;font-size:12px;';
+                        tr.appendChild(td);
+                    });
+                    summaryTable.appendChild(tr);
+                });
+
+                const buttonsDiv = document.createElement('div');
+                buttonsDiv.style.cssText = 'display:flex;gap:15px;justify-content:center;margin-top:20px;';
+
+                const confirmBtn = document.createElement('button');
+                confirmBtn.innerHTML = '<span class="icon">📈</span> تأكيد حفظ التقرير';
+                confirmBtn.className = 'btn btn-info';
+                confirmBtn.style.cssText = 'padding:12px 30px;font-size:16px;';
+                confirmBtn.onclick = () => {
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `تقرير_الأنشطة_${month}_${year}_${new Date().toISOString().split('T')[0]}.xls`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                    showNotification(`✅ تم حفظ التقرير (${Object.keys(grouped).length} نشاط مختلف)`, 'success');
+                    document.body.removeChild(previewModal);
+                };
+
+                const cancelBtn = document.createElement('button');
+                cancelBtn.innerHTML = '<span class="icon">❌</span> إلغاء';
+                cancelBtn.className = 'btn btn-warning';
+                cancelBtn.style.cssText = 'padding:12px 30px;font-size:16px;';
+                cancelBtn.onclick = () => {
+                    document.body.removeChild(previewModal);
+                    URL.revokeObjectURL(url);
+                    showNotification('❌ تم إلغاء حفظ التقرير', 'info');
+                };
+
+                buttonsDiv.appendChild(confirmBtn);
+                buttonsDiv.appendChild(cancelBtn);
+
+                previewContent.appendChild(previewTitle);
+                previewContent.appendChild(infoDiv);
+                previewContent.appendChild(summaryTable);
+                previewContent.appendChild(buttonsDiv);
+                previewModal.appendChild(previewContent);
+                document.body.appendChild(previewModal);
+
+            } catch (error) {
+                console.error('Error generating report:', error);
+                showNotification('❌ حدث خطأ أثناء إنشاء التقرير: ' + error.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<span class="icon">📈</span> تقرير Excel';
+            }
+        }
+
+        // ========== FIXED clearAll FUNCTION ==========
         function clearAll() {
-            if (confirm('هل أنت متأكد من مسح جميع البيانات؟')) {
+            if (confirm('هل أنت متأكد من مسح جميع البيانات؟ سيتم حذف البيانات المخزنة محلياً فقط.')) {
+                // Get current accumulated data before clearing
+                const currentPDFData = localStorage.getItem('accumulatedPDFData');
+                const currentExcelData = localStorage.getItem('accumulatedExcelData');
+
+                // Clear localStorage
                 localStorage.removeItem('securityFormData');
                 localStorage.removeItem('accumulatedPDFData');
+                localStorage.removeItem('accumulatedExcelData');
+
+                // Reset variables
                 accumulatedPDFData = { month: '', year: '2026', responsibleEmployee: '', department: '', rows: [] };
+                accumulatedExcelData = { month: '', year: '2026', responsibleEmployee: '', department: '', rows: [] };
+
+                // Clear table
                 document.getElementById('tableBody').innerHTML = '';
+
+                // Reset dropdowns
                 document.getElementById('monthSelect').value = '';
                 document.getElementById('yearSelect').value = '2026';
                 document.getElementById('responsibleEmployee').value = '';
                 document.getElementById('departmentSelect').value = '';
+
                 updateHeader();
                 addRow();
-                showNotification('🗑️ تم مسح جميع البيانات', 'success');
+
+                showNotification('🗑️ تم مسح جميع البيانات من الجدول والتخزين المحلي', 'success');
             }
         }
 
@@ -1229,492 +1662,6 @@
         });
 
         setInterval(autoSave, 30000);
-
-        let currentShareBlob = null;
-        let currentShareFileName = '';
-
-        function showShareModal(title, text) {
-            document.getElementById('shareModalTitle').textContent = title;
-            document.getElementById('shareModalText').textContent = text;
-            document.getElementById('shareModal').classList.add('show');
-        }
-
-        function closeShareModal() {
-            document.getElementById('shareModal').classList.remove('show');
-            currentShareBlob = null;
-            currentShareFileName = '';
-        }
-
-        async function generatePDFForShare() {
-            const month = document.getElementById('monthSelect').value || 'غير محدد';
-            const year = document.getElementById('yearSelect').value || '2026';
-            const responsibleEmployee = document.getElementById('responsibleEmployee').value || 'غير محدد';
-            const department = document.getElementById('departmentSelect').value || 'غير محدد';
-            const currentRows = collectCurrentData();
-
-            if (!currentRows || currentRows.length === 0) {
-                showNotification('⚠️ لا توجد بيانات للمشاركة', 'error');
-                return null;
-            }
-
-            const result = await createPDF(month, year, responsibleEmployee, department, currentRows, 'مشاركة');
-            if (result) {
-                currentShareBlob = result.blob;
-                currentShareFileName = result.fileName;
-                return result;
-            }
-            return null;
-        }
-
-        async function shareViaWhatsApp() {
-            const btn = document.getElementById('shareWhatsAppBtn');
-            btn.disabled = true;
-            btn.textContent = '⏳ جاري التحضير...';
-
-            try {
-                const result = await generatePDFForShare();
-                if (result) {
-                    showShareModal(
-                        'مشاركة عبر واتساب',
-                        'سيتم إرسال الاستمارة كملف PDF إلى الرقم: 07832343993\n\nملاحظة: يجب فتح واتساب ويب أو تطبيق واتساب على جهازك'
-                    );
-                }
-            } catch (error) {
-                console.error('Error preparing WhatsApp share:', error);
-                showNotification('❌ حدث خطأ أثناء التحضير', 'error');
-            } finally {
-                btn.disabled = false;
-                btn.textContent = '📱 واتساب';
-            }
-        }
-
-        async function shareViaEmail() {
-            const btn = document.getElementById('shareEmailBtn');
-            btn.disabled = true;
-            btn.textContent = '⏳ جاري التحضير...';
-
-            try {
-                const result = await generatePDFForShare();
-                if (result) {
-                    showShareModal(
-                        'مشاركة عبر البريد الإلكتروني',
-                        'سيتم إرسال الاستمارة كملف PDF عبر البريد الإلكتروني'
-                    );
-                }
-            } catch (error) {
-                console.error('Error preparing email share:', error);
-                showNotification('❌ حدث خطأ أثناء التحضير', 'error');
-            } finally {
-                btn.disabled = false;
-                btn.textContent = '📧 إيميل';
-            }
-        }
-
-        function confirmShareWhatsApp() {
-            if (!currentShareBlob) {
-                showNotification('❌ لا يوجد ملف للمشاركة', 'error');
-                return;
-            }
-
-            const file = new File([currentShareBlob], currentShareFileName, { type: 'application/pdf' });
-
-            if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-                navigator.share({
-                    title: 'استمارة نشاطات قسم الإعداد والتدريب',
-                    text: 'مرفق استمارة النشاطات الشهرية',
-                    files: [file]
-                }).then(() => {
-                    showNotification('✅ تم فتح نافذة المشاركة', 'success');
-                }).catch((error) => {
-                    console.log('Share cancelled or failed:', error);
-                    openWhatsAppWeb();
-                });
-            } else {
-                openWhatsAppWeb();
-            }
-
-            closeShareModal();
-        }
-
-        function openWhatsAppWeb() {
-            const month = document.getElementById('monthSelect').value || 'غير محدد';
-            const year = document.getElementById('yearSelect').value || '2026';
-            const message = encodeURIComponent(
-                'السلام عليكم\n\n' +
-                'مرفق استمارة نشاطات قسم الإعداد والتدريب\n' +
-                'الشهر: ' + month + '\n' +
-                'السنة: ' + year + '\n\n' +
-                'يرجى تحميل الملف المرفق (PDF) من النافذة السابقة أو طلب إعادة الإرسال.'
-            );
-
-            const phoneNumber = '9647832343993';
-            const whatsappUrl = 'https://wa.me/' + phoneNumber + '?text=' + message;
-
-            window.open(whatsappUrl, '_blank');
-            showNotification('📱 تم فتح واتساب. يرجى إرفاق ملف PDF يدوياً', 'info');
-        }
-
-        function confirmShareEmail() {
-            if (!currentShareBlob) {
-                showNotification('❌ لا يوجد ملف للمشاركة', 'error');
-                return;
-            }
-
-            const month = document.getElementById('monthSelect').value || 'غير محدد';
-            const year = document.getElementById('yearSelect').value || '2026';
-            const responsibleEmployee = document.getElementById('responsibleEmployee').value || 'غير محدد';
-
-            const subject = encodeURIComponent('استمارة نشاطات قسم الإعداد والتدريب - ' + month + ' ' + year);
-            const body = encodeURIComponent(
-                'السلام عليكم ورحمة الله وبركاته،\n\n' +
-                'مرفق استمارة نشاطات قسم الإعداد والتدريب للشهر الحالي.\n\n' +
-                'تفاصيل الاستمارة:\n' +
-                '- الشهر: ' + month + '\n' +
-                '- السنة: ' + year + '\n' +
-                '- الموظف المسؤول: ' + responsibleEmployee + '\n\n' +
-                'مع التحية،\n' +
-                'قسم الإعداد والتدريب\n' +
-                'مديرية تربية المثنى'
-            );
-
-            const file = new File([currentShareBlob], currentShareFileName, { type: 'application/pdf' });
-
-            if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-                navigator.share({
-                    title: 'استمارة نشاطات قسم الإعداد والتدريب',
-                    text: 'مرفق استمارة النشاطات الشهرية',
-                    files: [file]
-                }).then(() => {
-                    showNotification('✅ تم فتح نافذة المشاركة', 'success');
-                }).catch(() => {
-                    openDefaultEmail(subject, body);
-                });
-            } else {
-                openDefaultEmail(subject, body);
-            }
-
-            closeShareModal();
-        }
-
-        function openDefaultEmail(subject, body) {
-            const mailtoUrl = 'mailto:?subject=' + subject + '&body=' + body;
-            window.open(mailtoUrl, '_blank');
-            showNotification('📧 تم فتح تطبيق البريد الإلكتروني. يرجى إرفاق ملف PDF يدوياً', 'info');
-        }
-
-        document.getElementById('shareModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeShareModal();
-            }
-        });
-
-        async function exportToExcel() {
-            const btn = document.getElementById('exportExcelBtn');
-            btn.disabled = true;
-            btn.textContent = '⏳ جاري التصدير...';
-
-            try {
-                const month = document.getElementById('monthSelect').value || 'غير محدد';
-                const year = document.getElementById('yearSelect').value || '2026';
-                const responsibleEmployee = document.getElementById('responsibleEmployee').value || 'غير محدد';
-                const department = document.getElementById('departmentSelect').value || 'غير محددة';
-                const currentRows = collectCurrentData();
-
-                if (!currentRows || currentRows.length === 0) {
-                    showNotification('⚠️ لا توجد بيانات للتصدير', 'error');
-                    return;
-                }
-
-                // Create workbook
-                const wb = XLSX.utils.book_new();
-                wb.Props = {
-                    Title: "استمارة نشاطات قسم الإعداد والتدريب",
-                    Subject: "الأنشطة الشهرية",
-                    Author: "قسم الإعداد والتدريب - مديرية تربية المثنى",
-                    CreatedDate: new Date()
-                };
-
-                // Header data
-                const headerInfo = [
-                    ['وزارة التربية'],
-                    ['مديرية تربية المثنى'],
-                    ['قسم الإعداد والتدريب'],
-                    [''],
-                    ['استمارة نشاطات قسم الإعداد والتدريب'],
-                    ['استمارة الانشطة الشهرية'],
-                    ['الشهر: ' + month + ' | السنة: ' + year],
-                    ['الموظف المسؤول: ' + responsibleEmployee + ' | الشعبة: ' + department],
-                    [''],
-                    ['ت', 'اسم النشاط', 'عدد المشتركين', 'جهة التنفيذ', 'الجهة المستفيدة', 'تاريخ التنفيذ']
-                ];
-
-                // Data rows
-                const dataRows = currentRows.map((row, index) => [
-                    index + 1,
-                    row.activityName || '',
-                    row.participants || '',
-                    row.executor || '',
-                    row.beneficiary || '',
-                    row.date || ''
-                ]);
-
-                // Footer
-                const footerRows = [
-                    [''],
-                    ['تصميم وبرمجة م. م صفاء هادي عبد العالي - مدير قسم الإعداد والتدريب'],
-                    ['تاريخ التصدير: ' + new Date().toLocaleDateString('ar-IQ')],
-                    ['عدد السجلات: ' + currentRows.length]
-                ];
-
-                const allData = [...headerInfo, ...dataRows, ...footerRows];
-                const ws = XLSX.utils.aoa_to_sheet(allData);
-
-                // Set column widths
-                ws['!cols'] = [
-                    { wch: 5 },   // ت
-                    { wch: 35 },  // اسم النشاط
-                    { wch: 15 },  // عدد المشتركين
-                    { wch: 25 },  // جهة التنفيذ
-                    { wch: 25 },  // الجهة المستفيدة
-                    { wch: 15 }   // تاريخ التنفيذ
-                ];
-
-                // Set row heights for header
-                ws['!rows'] = [
-                    { hpt: 20 }, { hpt: 20 }, { hpt: 20 }, { hpt: 10 },
-                    { hpt: 25 }, { hpt: 22 }, { hpt: 20 }, { hpt: 20 }, { hpt: 10 },
-                    { hpt: 25 }
-                ];
-
-                // Merge cells for header rows
-                ws['!merges'] = [
-                    { s: { r: 0, c: 0 }, e: { r: 0, c: 5 } },  // وزارة التربية
-                    { s: { r: 1, c: 0 }, e: { r: 1, c: 5 } },  // مديرية تربية المثنى
-                    { s: { r: 2, c: 0 }, e: { r: 2, c: 5 } },  // قسم الإعداد والتدريب
-                    { s: { r: 4, c: 0 }, e: { r: 4, c: 5 } },  // استمارة نشاطات
-                    { s: { r: 5, c: 0 }, e: { r: 5, c: 5 } },  // استمارة الانشطة الشهرية
-                    { s: { r: 6, c: 0 }, e: { r: 6, c: 5 } },  // الشهر والسنة
-                    { s: { r: 7, c: 0 }, e: { r: 7, c: 5 } },  // الموظف والشعبة
-                    { s: { r: allData.length - 3, c: 0 }, e: { r: allData.length - 3, c: 5 } },  // التصميم
-                    { s: { r: allData.length - 2, c: 0 }, e: { r: allData.length - 2, c: 5 } },  // التاريخ
-                    { s: { r: allData.length - 1, c: 0 }, e: { r: allData.length - 1, c: 5 } }   // عدد السجلات
-                ];
-
-                // Add styles to cells (using cell objects with s property)
-                const headerStyle = {
-                    font: { bold: true, color: { rgb: "1E3C72" }, sz: 14, name: "Arial" },
-                    alignment: { horizontal: "center", vertical: "center" },
-                    fill: { fgColor: { rgb: "D0D8E8" } }
-                };
-
-                const titleStyle = {
-                    font: { bold: true, color: { rgb: "FFFFFF" }, sz: 16, name: "Arial" },
-                    alignment: { horizontal: "center", vertical: "center" },
-                    fill: { fgColor: { rgb: "1E3C72" } }
-                };
-
-                const subtitleStyle = {
-                    font: { bold: true, color: { rgb: "2A5298" }, sz: 12, name: "Arial" },
-                    alignment: { horizontal: "center", vertical: "center" }
-                };
-
-                const tableHeaderStyle = {
-                    font: { bold: true, color: { rgb: "FFFFFF" }, sz: 11, name: "Arial" },
-                    alignment: { horizontal: "center", vertical: "center" },
-                    fill: { fgColor: { rgb: "1E3C72" } },
-                    border: {
-                        top: { style: "thin", color: { rgb: "1E3C72" } },
-                        bottom: { style: "thin", color: { rgb: "1E3C72" } },
-                        left: { style: "thin", color: { rgb: "1E3C72" } },
-                        right: { style: "thin", color: { rgb: "1E3C72" } }
-                    }
-                };
-
-                const dataStyle = {
-                    font: { sz: 11, name: "Arial" },
-                    alignment: { horizontal: "center", vertical: "center" },
-                    border: {
-                        top: { style: "thin", color: { rgb: "DEE2E6" } },
-                        bottom: { style: "thin", color: { rgb: "DEE2E6" } },
-                        left: { style: "thin", color: { rgb: "DEE2E6" } },
-                        right: { style: "thin", color: { rgb: "DEE2E6" } }
-                    }
-                };
-
-                const footerStyle = {
-                    font: { sz: 10, color: { rgb: "666666" }, name: "Arial" },
-                    alignment: { horizontal: "center", vertical: "center" }
-                };
-
-                // Apply styles to header rows
-                for (let r = 0; r <= 2; r++) {
-                    const cellRef = XLSX.utils.encode_cell({ r: r, c: 0 });
-                    if (ws[cellRef]) ws[cellRef].s = headerStyle;
-                }
-
-                // Title rows
-                const titleRow = 4;
-                const titleCell = XLSX.utils.encode_cell({ r: titleRow, c: 0 });
-                if (ws[titleCell]) ws[titleCell].s = titleStyle;
-
-                const subTitleRow = 5;
-                const subTitleCell = XLSX.utils.encode_cell({ r: subTitleRow, c: 0 });
-                if (ws[subTitleCell]) ws[subTitleCell].s = { ...titleStyle, font: { ...titleStyle.font, sz: 14 } };
-
-                // Info rows
-                for (let r = 6; r <= 7; r++) {
-                    const cellRef = XLSX.utils.encode_cell({ r: r, c: 0 });
-                    if (ws[cellRef]) ws[cellRef].s = subtitleStyle;
-                }
-
-                // Table header row
-                const tableHeaderRow = 9;
-                for (let c = 0; c < 6; c++) {
-                    const cellRef = XLSX.utils.encode_cell({ r: tableHeaderRow, c: c });
-                    if (ws[cellRef]) ws[cellRef].s = tableHeaderStyle;
-                }
-
-                // Data rows styling
-                for (let r = 10; r < 10 + currentRows.length; r++) {
-                    for (let c = 0; c < 6; c++) {
-                        const cellRef = XLSX.utils.encode_cell({ r: r, c: c });
-                        if (ws[cellRef]) {
-                            ws[cellRef].s = dataStyle;
-                            // Alternate row colors
-                            if ((r - 10) % 2 === 1) {
-                                ws[cellRef].s = { ...dataStyle, fill: { fgColor: { rgb: "F8F9FA" } } };
-                            }
-                        }
-                    }
-                }
-
-                // Footer styling
-                for (let r = allData.length - 3; r < allData.length; r++) {
-                    const cellRef = XLSX.utils.encode_cell({ r: r, c: 0 });
-                    if (ws[cellRef]) ws[cellRef].s = footerStyle;
-                }
-
-                XLSX.utils.book_append_sheet(wb, ws, "الأنشطة الشهرية");
-
-                const fileName = 'استمارة_' + month + '_' + year + '_Excel_' + new Date().toISOString().split('T')[0] + '.xlsx';
-                XLSX.writeFile(wb, fileName);
-
-                showNotification('✅ تم تصدير Excel بنجاح (' + currentRows.length + ' سجل)', 'success');
-            } catch (error) {
-                console.error('Error exporting Excel:', error);
-                showNotification('❌ حدث خطأ أثناء تصدير Excel: ' + error.message, 'error');
-            } finally {
-                btn.disabled = false;
-                btn.textContent = '📊 تصدير Excel';
-            }
-        }
-
-        // دالة حفظ Excel تراكمي (مثل PDF)
-        async function saveExcel() {
-            const btn = document.getElementById('saveExcelBtn');
-            if (!btn) return;
-            btn.disabled = true;
-            btn.textContent = '⏳ جاري الحفظ...';
-
-            try {
-                const month = document.getElementById('monthSelect').value || 'غير محدد';
-                const year = document.getElementById('yearSelect').value || '2026';
-                const responsibleEmployee = document.getElementById('responsibleEmployee').value || 'غير محدد';
-                const department = document.getElementById('departmentSelect').value || 'غير محددة';
-                const currentRows = collectCurrentData();
-
-                if (!accumulatedPDFData.month) accumulatedPDFData.month = month;
-                if (!accumulatedPDFData.year) accumulatedPDFData.year = year;
-                if (!accumulatedPDFData.responsibleEmployee) accumulatedPDFData.responsibleEmployee = responsibleEmployee;
-                if (!accumulatedPDFData.department) accumulatedPDFData.department = department;
-
-                const mergeResult = mergeRowsWithoutDuplicates(accumulatedPDFData.rows, currentRows);
-                accumulatedPDFData.rows = mergeResult.unique;
-
-                localStorage.setItem('accumulatedPDFData', JSON.stringify(accumulatedPDFData));
-
-                // Create Excel with accumulated data
-                const wb = XLSX.utils.book_new();
-                const allRows = accumulatedPDFData.rows;
-
-                const headerInfo = [
-                    ['وزارة التربية'],
-                    ['مديرية تربية المثنى'],
-                    ['قسم الإعداد والتدريب'],
-                    [''],
-                    ['استمارة نشاطات قسم الإعداد والتدريب'],
-                    ['استمارة الانشطة الشهرية - حفظ تراكمي'],
-                    ['الشهر: ' + accumulatedPDFData.month + ' | السنة: ' + accumulatedPDFData.year],
-                    ['الموظف المسؤول: ' + accumulatedPDFData.responsibleEmployee + ' | الشعبة: ' + accumulatedPDFData.department],
-                    [''],
-                    ['ت', 'اسم النشاط', 'عدد المشتركين', 'جهة التنفيذ', 'الجهة المستفيدة', 'تاريخ التنفيذ']
-                ];
-
-                const dataRows = allRows.map((row, index) => [
-                    index + 1,
-                    row.activityName || '',
-                    row.participants || '',
-                    row.executor || '',
-                    row.beneficiary || '',
-                    row.date || ''
-                ]);
-
-                const footerRows = [
-                    [''],
-                    ['تصميم وبرمجة م. م صفاء هادي عبد العالي - مدير قسم الإعداد والتدريب'],
-                    ['تاريخ الحفظ: ' + new Date().toLocaleDateString('ar-IQ') + ' | نوع العملية: حفظ تراكمي'],
-                    ['عدد السجلات الفريدة: ' + allRows.length]
-                ];
-
-                if (mergeResult.duplicatesCount > 0) {
-                    footerRows.push(['تم حذف ' + mergeResult.duplicatesCount + ' سجل مكرر']);
-                }
-
-                const allData = [...headerInfo, ...dataRows, ...footerRows];
-                const ws = XLSX.utils.aoa_to_sheet(allData);
-
-                ws['!cols'] = [
-                    { wch: 5 }, { wch: 35 }, { wch: 15 }, { wch: 25 }, { wch: 25 }, { wch: 15 }
-                ];
-
-                ws['!merges'] = [
-                    { s: { r: 0, c: 0 }, e: { r: 0, c: 5 } },
-                    { s: { r: 1, c: 0 }, e: { r: 1, c: 5 } },
-                    { s: { r: 2, c: 0 }, e: { r: 2, c: 5 } },
-                    { s: { r: 4, c: 0 }, e: { r: 4, c: 5 } },
-                    { s: { r: 5, c: 0 }, e: { r: 5, c: 5 } },
-                    { s: { r: 6, c: 0 }, e: { r: 6, c: 5 } },
-                    { s: { r: 7, c: 0 }, e: { r: 7, c: 5 } }
-                ];
-
-                // Add footer merges
-                const footerStart = allData.length - footerRows.length;
-                for (let i = 0; i < footerRows.length; i++) {
-                    ws['!merges'].push({
-                        s: { r: footerStart + i, c: 0 },
-                        e: { r: footerStart + i, c: 5 }
-                    });
-                }
-
-                XLSX.utils.book_append_sheet(wb, ws, "الأنشطة التراكمية");
-
-                const fileName = 'استمارة_' + accumulatedPDFData.month + '_' + accumulatedPDFData.year + '_Excel_تراكمي_' + new Date().toISOString().split('T')[0] + '.xlsx';
-                XLSX.writeFile(wb, fileName);
-
-                let msg = '✅ تم حفظ Excel بشكل تراكمي (' + allRows.length + ' سجل فريد)';
-                if (mergeResult.duplicatesCount > 0) {
-                    msg += ' | تم حذف ' + mergeResult.duplicatesCount + ' سجل مكرر';
-                }
-                showNotification(msg, 'success');
-            } catch (error) {
-                console.error('Error saving Excel:', error);
-                showNotification('❌ حدث خطأ أثناء الحفظ', 'error');
-            } finally {
-                btn.disabled = false;
-                btn.textContent = '💾 حفظ Excel';
-            }
-        }
-
     </script>
 </body>
 </html>
